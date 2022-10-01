@@ -46,3 +46,45 @@ def countduplicates(arr,target):
 print(countduplicates([1,2,2,2,3,3,4],2))
 
 #Count Duplicates with Binary Search
+
+def first(arr,target):
+    start = 0
+    end = len(arr) -1
+    
+
+    while start <= end:
+        middle = start + (end-start)//2
+        if arr[middle] == target:
+            if (middle -1>=0 and arr[middle-1]==target):
+                end = middle -1
+                continue
+            return middle
+        elif arr[middle] < target:
+            start = middle +1
+        else:
+            end = middle -1
+    return -1
+
+
+def last(arr,target):
+    # find middle == target
+    # go on increasing middle until arr[middle] == target
+    start = 0
+    end = len(arr) -1
+    while start <= end:
+        middle = start + (end-start)//2
+        if arr[middle] == target:
+            if middle +1 <len(arr) and arr[middle+1]==target:
+                start = middle +1
+                continue
+            return middle
+
+        if arr[middle]<target:
+            start = middle +1
+        else:
+            end = middle -1
+    
+    return -1 
+print(first([1,2,2,2,3],2))
+
+print(last([1,2,2,2,3,3],2))
