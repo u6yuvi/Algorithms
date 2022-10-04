@@ -30,8 +30,6 @@ We repeatedly compare each pair of adjacent items
 and swap them if they are in the wrong order
 '''
 
-from pydoc import cli
-
 
 def bubblesort(clist):
     '''
@@ -153,15 +151,51 @@ def merge(arr,l,m,r):
 
 
 
-def mergesort(arr,left_indx,right_indx):
-    if left_indx<right_indx: # stopping condition
-        # create two sub arrays
-        m = (left_indx + (right_indx-1))//2
-        mergesort(arr, left_indx,m)
-        mergesort(arr,m,right_indx)
-        merge(arr,left_indx,m,right_indx)
-    return arr
+def merge(customList, l, m, r):
+    n1 = m - l + 1
+    n2 = r - m
+    #print(n1,n2,l,m,r)
 
+    L = [0] * (n1)
+    R = [0] * (n2)
+
+    for i in range(0, n1):
+        L[i] = customList[l+i]
+    print("L",L)
+    for j in range(0, n2):
+        R[j] = customList[m+1+j]
+    print("R",R)
+    
+    i = 0 
+    j = 0
+    k = l
+    while i < n1 and j < n2:
+        if L[i] <= R[j]:
+            customList[k] = L[i]
+            i += 1
+        else:
+            customList[k] = R[j]
+            j += 1
+        k += 1
+    while i < n1:
+        customList[k] = L[i]
+        i += 1
+        k += 1
+    
+    while j < n2:
+        customList[k] = R[j]
+        j += 1
+        k += 1
+
+def mergeSort(customList, l, r):
+    print("Enter",customList)
+    if l < r:
+        m = (l+(r-1))//2
+        mergeSort(customList, l, m)
+        mergeSort(customList, m+1, r)
+        merge(customList, l, m, r)
+        print(customList)
+    return customList
 
 
 
@@ -173,7 +207,7 @@ if __name__=="__main__":
 
     print(insertionsort([2,1,23,4,3]))
 
-    arr1 = [12, 11, 13, 5, 6, 7]
+    arr1 = [12, 11, 13, 5, 7, 6]
     #print(mergesort(arr1,0,len(arr1)-1))
 
     print(arr1[0:3],arr1[3:5])
@@ -182,3 +216,58 @@ if __name__=="__main__":
     print(mid)
 
     print(arr1[0:mid],arr1[mid:])
+
+
+
+# def merge(arr,start,middle,end):
+#     # store in two arrays , left and right
+#     n1 = middle - start +1
+#     n2 = end - middle
+#     # L = arr[start:middle+1]
+#     # R = arr[middle:end]
+#     # i ,j,k = 0,0,start
+#     L = [0]*n1
+#     R = [0]*n2
+
+#     for i in range(n1):
+#         L[i] = arr[start+i]
+
+#     for j in range(n2):
+#         R[i] = arr[middle+1+j]
+
+#     i = 0
+#     j=0
+#     k = start
+#     while i < n1 and j < n2:
+#         if  L[i]<=R[j]:
+#             arr[k] = L[i]
+#             i+=1
+#         else:
+#             arr[k] = R[j]
+#             j+=1
+#         k+=1
+    
+#     while i <n1:
+#         arr[k] = L[i]
+#         k+=1
+#         i+=1
+#     while j < n2:
+#         arr[k] = R[j]
+#         k+=1
+#         j+=1
+
+
+# def mergesort(arr,start,end):
+#     if start < end:
+#         middle = (start + (end-1))//2
+#         mergesort(arr,start,middle)
+#         mergesort(arr,middle+1,end)
+#         merge(arr,start,middle,end)
+#     return arr
+
+
+arr1 = [12, 11, 10, 5, 7, 4]
+start = 0
+end = len(arr1)-1
+print(mergeSort(arr1,start,end))
+# start,end
