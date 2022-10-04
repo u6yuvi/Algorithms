@@ -31,6 +31,9 @@ and swap them if they are in the wrong order
 '''
 
 
+from turtle import end_fill
+
+
 def bubblesort(clist):
     '''
     Time Complexity - O(n^2)
@@ -112,45 +115,6 @@ def insertionsort(clist):
     return clist
 
 
-
-def merge(arr,l,m,r):
-    n1 = m-l +1
-    n2 = r-m
-    L = [0]* n1
-    R = [0]*n2
-
-    #copy elements from arr to sub array
-    for i in range(0,n1):
-        L[i] = arr[l+i]
-
-    for j in range(0,n2):
-        R[j] = arr[m+1+j]
-
-    #set initial index to 0
-    i = 0
-    j = 0
-    k = l
-        
-    while i < n1 and j < n2:
-        if L[i] <= R[j]:
-            arr[k] = L[i]
-            i+=1
-        else:
-            arr[k] = R[j]
-            j+=1
-        k+=1
-    
-    while i < n1:
-        arr[k] = L[i]
-        i+=1
-        k+=1
-    while j < n2:
-        arr[k] = R[j]
-        j+=1
-        k+=1
-
-
-
 def merge(customList, l, m, r):
     n1 = m - l + 1
     n2 = r - m
@@ -188,6 +152,10 @@ def merge(customList, l, m, r):
         k += 1
 
 def mergeSort(customList, l, r):
+    '''
+    Time Complexity - O(nlogn)
+    Space Complexity - O(n)
+    '''
     print("Enter",customList)
     if l < r:
         m = (l+(r-1))//2
@@ -266,8 +234,61 @@ if __name__=="__main__":
 #     return arr
 
 
-arr1 = [12, 11, 10, 5, 7, 4]
-start = 0
-end = len(arr1)-1
-print(mergeSort(arr1,start,end))
-# start,end
+# arr1 = [12, 11, 10, 5, 7, 4]
+# start = 0
+# end = len(arr1)-1
+# print(mergeSort(arr1,start,end))
+# # start,end
+
+def merge1(arr,s,m,e):
+    n1 = m-s+1
+    n2 = e-m
+
+    L = [0]*n1
+    R = [0]*n2
+
+
+    for i in range(n1):
+        L[i] = arr[s+i]
+    print("L",L)
+    for j in range(n2):
+        R[j] = arr[m+1+j]
+    print("R",R)
+
+    i = 0
+    j = 0
+    k = s
+
+    while i <n1 and j<n2:
+        if L[i] <= R[j]:
+            arr[k] = L[i]
+            i+=1
+        else:
+            arr[k] = R[j]
+            j+=1
+        k+=1
+    
+    while i < n1:
+        arr[k] = L[i]
+        i+=1
+        k+=1
+
+    while j < n2:
+        arr[k] = R[j]
+        k+=1
+        j+=1
+
+
+
+
+def mergersort1(arr,start,end):
+    print(arr)
+    if start < end:
+        middle = (start + end-1)//2
+        mergersort1(arr,start,middle)
+        mergersort1(arr,middle+1,end)
+        merge1(arr,start,middle,end)
+    return arr
+
+arr = [12,11,10,5,7,6]
+print(mergersort1(arr,0,5))
