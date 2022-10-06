@@ -1,3 +1,6 @@
+#References
+#https://www.interviewkickstart.com/learn/comparison-among-bubble-sort-selection-sort-and-insertion-sort
+
 '''
 Sorting Algorithms can be divided based on the following categories
 
@@ -93,6 +96,11 @@ def insertionsort(clist):
     Take first element from unsorted array and find its correct position in
     sorted array
     Repeat until unsorted array is empty
+    Logic
+    1. Select an  element 
+    2. Increase the span the sorted arry window untill that element
+    3. keep shifting the element in the sorted array for placing the element
+    4. add the sorted array with th element.
     Time Complexity - O(n^2)
     Space Complexity - O(1)
     Advantages:
@@ -151,6 +159,7 @@ def merge(customList, l, m, r):
         j += 1
         k += 1
 
+#Merge Sort - https://www.programiz.com/dsa/merge-sort
 def mergeSort(customList, l, r):
     '''
     Time Complexity - O(nlogn)
@@ -174,9 +183,11 @@ if __name__=="__main__":
     assert selectionsort([2,1,23,4,3]) == [1,2,3,4,23]
 
     print(insertionsort([2,1,23,4,3]))
-
     arr1 = [12, 11, 13, 5, 7, 6]
-    print(mergeSort(arr1,0,len(arr1)-1))
+    print(insertionsort(arr1))
+
+    # arr1 = [12, 11, 13, 5, 7, 6]
+    # print(mergeSort(arr1,0,len(arr1)-1))
 
     # print(arr1[0:3],arr1[3:5])
 

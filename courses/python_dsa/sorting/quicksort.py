@@ -1,3 +1,5 @@
+#Reference
+#https://www.programiz.com/dsa/quick-sort
 
 def partition(arr,start,end):
     pivot = arr[end] #last element in the array 1st pointer
