@@ -57,7 +57,7 @@ binary search for bigger array
 '''
 def binary_search(arr,val):
     start = 0
-    end = len(arr) -1 
+    end = len(arr) -1
     mid = start + (end-start)//2
     while start < end and arr[mid]!=val:
         #print(start,end)
