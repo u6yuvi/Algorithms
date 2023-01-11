@@ -8,10 +8,26 @@ def heap_sort(arr):
     """
     # Write your code here.
     
-    #Step-1 Heapify 
-    #Step-2 Extract Max(Swap max with the last element)
-    #Step3 - Heapify the swapped root element
-    
+    '''
+    Step-1 Heapify 
+        1. Bubble up the max element to form a max_heap
+            for i in range(max_level,0)
+                heapify(arr,i,total_elements)
+
+            def heapify(arr,i,total_elements):
+                fetch left child index
+                fetch right child index
+                largest = parent node index
+                if l_child and r_child are less than total_elements
+                    swap if any l_child or r_child is greater than parent element(i)
+                    heapify(arr,new_parent,old_parent)
+
+    #Step-2 Extract Max and put it at the last leaf node
+    # (Swap max[root parent] with the last element)
+        for in in range(bottom ,top):
+            swap root_node with the last leaf node
+    #Step3 - Heapify the root element
+    '''
     n = len(arr)
     no_levels = n//2
     
