@@ -122,7 +122,68 @@ Space Complexity : Input + Aux Space + Output
                     '''
 # print(letter_case_permutations("a1z"))
 
-#------------------------Question-3--------------------------------------
+
+#--------------------------Question-3-----------------------
+'''
+Generate All Subsets Of A Set
+Generate ALL possible subsets of a given set. The set is given in the form of a string s containing distinct lowercase characters 'a' - 'z'.
+
+Example
+{
+"s": "xy"
+}
+Output:
+
+["", "x", "y", "xy"]
+
+'''
+
+
+def generate_all_subsets(s):
+    """
+    Args:
+    s(str)
+    Returns:
+    list_str
+    """
+    # Write your code here.
+
+    slate = []
+    result = []
+
+    def generate_all_subset_helper(s,i,slate):
+        #base case
+        if i == len(s):
+            result.append("".join(slate))
+            return
+        
+        #recursive case
+        else:
+            #exclude case
+            generate_all_subset_helper(s,i+1,slate)
+
+            #include
+            slate.append(s[i])
+            generate_all_subset_helper(s,i+1,slate)
+            slate.pop()
+
+        return
+    
+    generate_all_subset_helper(s,0,slate)
+
+    return result
+'''
+Time Complexity - Leaf Node + Intermediate Node
+                2^n * n   + < 2^n*1
+Space Complexity - Input + Aux + Output
+                    O(n) + O(n) + O(2^n*n)
+'''
+
+# print("Generate all subset:",generate_all_subsets("xy"))
+
+
+
+#------------------------Question-4--------------------------------------
 
 '''
 Permute Array Of Integers Duplicates Allowed
@@ -198,7 +259,7 @@ Worst Case is when all numbers are unique.....
 # print(get_permutations([1, 2, 2]))
 
 
-#-------------------------Question-4-----------------------------------
+#-------------------------Question-5-----------------------------------
 
 '''
 Subsets With Duplicate Characters
@@ -259,7 +320,7 @@ Space Complexity - Input  + Aux + Output
 # print(get_distinct_subsets("aab"))
 
 
-#-----------------Question-5---------------------------
+#-----------------Question-6---------------------------
 
 '''
 Given a seven-digit phone number, return all the character combinations 
@@ -330,4 +391,82 @@ def get_words_from_phone_number(phone_number):
                        O(n).  + O(n). + O(4^n * n)
 '''
 
-print(get_words_from_phone_number("1234567"))
+# print(get_words_from_phone_number("1234567"))
+
+#-----------------------Question-7--------------------
+
+'''
+N Choose K Combinations
+Given two integers n and k, find all the possible unique combinations of k numbers in range 1 to n.
+
+Example One
+{
+"n": 5,
+"k": 2
+}
+Output:
+
+[
+[1, 2],
+[1, 3],
+[1, 4],
+[1, 5],
+[2, 3],
+[2, 4],
+[2, 5],
+[3, 4],
+[3, 5],
+[4, 5]
+]
+'''
+
+
+
+def find_combinations(n, k):
+    """
+    Args:
+     n(int32)
+     k(int32)
+    Returns:
+     list_list_int32
+    """
+    # Write your code here.
+
+    slate = []
+    result = []
+
+    def find_combinations_helper(s,i,slate,k):
+        
+        #backtracking case
+        if len(slate)==k:
+            result.append(slate[:])
+            return
+        
+        #redundant code in this case as the step size of slate it increasing by 1 so upper condition will be met first.
+        if len(slate)>k:
+            return 
+
+        # if len(slate)<k:
+
+        #base case
+        if i == len(s):
+            #result.append("".join(slate))
+            return
+        
+        #recursive case
+        else:
+            #exclude case
+            find_combinations_helper(s,i+1,slate,k)
+
+            #include
+            slate.append(s[i])
+            find_combinations_helper(s,i+1,slate,k)
+            slate.pop()
+
+        return
+    
+    s = list(range(1,n+1))
+    find_combinations_helper(s,0,slate,k)
+    return result
+
+print(find_combinations(5,2))
