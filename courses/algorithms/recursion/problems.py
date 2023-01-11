@@ -120,7 +120,7 @@ Space Complexity : Input + Aux Space + Output
                     
                     
                     '''
-print(letter_case_permutations("a1z"))
+# print(letter_case_permutations("a1z"))
 
 #------------------------Question-3--------------------------------------
 
@@ -195,7 +195,7 @@ Worst Case is when all numbers are unique.....
     
     
     '''
-print(get_permutations([1, 2, 2]))
+# print(get_permutations([1, 2, 2]))
 
 
 #-------------------------Question-4-----------------------------------
@@ -256,4 +256,78 @@ Space Complexity - Input  + Aux + Output
                    O(n)   + O(n)  + O(2^n *n)
 '''
 
-print(get_distinct_subsets("aab"))
+# print(get_distinct_subsets("aab"))
+
+
+#-----------------Question-5---------------------------
+
+'''
+Given a seven-digit phone number, return all the character combinations 
+that can be generated according to the following mapping:
+
+{
+"phone_number": "1234567"
+}
+Output:
+
+[
+"adgjmp",
+"adgjmq",
+"adgjmr",
+"adgjms",
+"adgjnp",
+...
+"cfilns",
+"cfilop",
+"cfiloq",
+"cfilor",
+"cfilos"
+]
+First string "adgjmp" in the first line comes from the first characters mapped 
+to digits 2, 3, 4, 5, 6 and 7 respectively. Since digit 1 maps to nothing, nothing 
+is appended before 'a'. Similarly, the fifth string "adgjnp" generated from first 
+characters of 2, 3, 4, 5 second character of 6 and first character of 7. 
+All combinations generated in such a way must be returned in the lexicographical order.
+'''
+
+
+def get_words_from_phone_number(phone_number):
+    """
+    Args:
+     phone_number(str)
+    Returns:
+     list_str
+    """
+    # Write your code here.
+    hash_map = {"2":["a","b","c"],"3":["d","e","f"],"4":["g","h","i"],"5":["j","k","l"],"6":["m","n","o"],
+        "7":["p","q","r","s"],"8":["t","u","v"],"9":["w","x","y","z"]}
+
+    slate = []
+    result = []
+    
+    def get_words_helper(phone_number,i,slate):
+        #base case
+        if i==len(phone_number):
+            result.append("".join(slate))
+            return
+        #recursive case
+        elif (phone_number[i]!="1") and (phone_number[i]!="0"):
+            for pick in hash_map[str(phone_number[i])]:
+                slate.append(pick)
+                get_words_helper(phone_number,i+1,slate)
+                slate.pop()
+        else:
+            get_words_helper(phone_number,i+1,slate)    
+        return
+
+    get_words_helper(phone_number,0,slate)
+    return result
+
+'''
+    Time Complexity - Leaf Node + Intermediary Node
+                      O(4^n *n)  +  <O(4^n)
+    Space Complexity - Input + Aux Space + Output
+                       O(n).  + O(n). + O(4^n * n)
+'''
+
+print(get_words_from_phone_number("1234567"))
