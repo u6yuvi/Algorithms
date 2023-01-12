@@ -469,4 +469,286 @@ def find_combinations(n, k):
     find_combinations_helper(s,0,slate,k)
     return result
 
-print(find_combinations(5,2))
+# print(find_combinations(5,2))
+
+
+#--------------------------Question-8------------------------------xxxxxxxxx Not yet solved
+
+'''
+Generate All Combinations With Sum Equal To Target
+Given an integer array, generate all the unique combinations of the array numbers that sum up to a given target value.
+
+Example One
+{
+"arr": [1, 2, 3],
+"target": 3
+}
+Output:
+
+[
+[3],
+[1, 2]
+]
+'''
+
+
+def generate_all_combinations(arr, target):
+    """
+    Args:
+     arr(list_int32)
+     target(int32)
+    Returns:
+     list_list_int32
+    """
+    # Write your code here.
+
+    result = []
+    slate = []
+    arr = sorted(arr)
+
+    def generate_all_cands_helper(arr,i,slate,target):
+        
+        #backtracking case
+        if sum(slate)==target:
+            result.append(slate[:])
+            return
+        
+       
+        if sum(slate)>target:
+            return
+
+       
+        #base case 
+        if i ==len(arr):
+            #result.append(slate[:])
+            return
+        
+        #recursion
+        else:
+            #cnt = 0
+            cnt = len([j for j in arr if arr[i]==j])
+
+            #inclusion
+            for pick in range(1,cnt+1):
+                slate.append(arr[i])
+                generate_all_cands_helper(arr,i+cnt,slate,target)
+            for pick in range(1,cnt+1):
+                slate.pop()
+
+            #exclusion
+            generate_all_cands_helper(arr,i+cnt,slate,target)
+        return
+
+    generate_all_cands_helper(arr,0,slate,target)
+    return result
+
+arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
+# print(sum(arr))
+# print(generate_all_combinations(arr,300))
+
+
+
+#-----------------------------Question-9--------------------------------------------
+def generate_all_valid_parenthesis(n):
+    """
+    Args:
+     arr(list_int32)
+     target(int32)
+    Returns:
+     list_list_int32
+    """
+    # Write your code here.
+
+    slate = []
+    result = []
+
+    def parenthesis_helper(n_left,n_right,slate):
+
+        #backtracking case
+
+        if n_left>n_right:
+            return
+        
+        
+        #base case
+        if n_left==0 and n_right==0:
+            result.append("".join(slate))
+            return
+
+        #recursive case
+        else:
+            if n_left>0:
+                slate.append("(")
+                parenthesis_helper(n_left=n_left-1, n_right=n_right,slate = slate)
+                slate.pop()
+
+            if n_right>0:
+                slate.append(")")
+                parenthesis_helper(n_left,n_right-1,slate)
+                slate.pop()
+
+        return
+    
+    parenthesis_helper(n,n,slate)
+    return result
+
+'''
+Time Complexity - Leaf Node + Intermediate Node
+                O(2^2n) * 2n  + < O(2^2n) * 2n
+This is a loose upper bound,we can have a tighter bound as the number of leaf nodes follows Catalan Sequence
+
+Space Complexity - Input + Aux + Output
+                   O(2n) + O(2n) + O(2*2n)*2n
+
+'''
+# print(generate_all_valid_parenthesis(n=2))
+
+
+#--------------------------Question-10----------------------------------------
+
+'''
+Problem
+  
+N Queen Problem
+Given an integer n, find all possible ways to position n queens on an n×n chessboard so that no two queens attack each other. A queen in chess can move horizontally, vertically, or diagonally.
+
+Do solve the problem using recursion first even if you see some non-recursive approaches.
+
+Example One
+{
+"n": 4
+}
+Output:
+
+[
+["--q-",
+ "q---",
+ "---q",
+ "-q--"],
+
+["-q--",
+ "---q",
+ "q---",
+ "--q-"]
+]
+'''
+
+def find_all_arrangements(n):
+    """
+    Args:
+     n(int32)
+    Returns:
+     list_list_str
+    """
+    # Write your code here.
+
+    slate = []
+    result = []
+
+    def find_all_helper(i,slate):
+        #backtracking case
+        lastq = len(slate)-1
+
+        #Case-1 Check for same columns
+        for earlier_q in range(0,lastq):
+            if slate[earlier_q] == slate[lastq]:
+                return
+        #Case-2
+            rowdiff = abs(lastq-earlier_q)
+            coldiff = abs(slate[lastq] - slate[earlier_q])
+            if rowdiff==coldiff:
+                return
+
+        #base case
+        if i==n:
+            result.append(slate[:])
+            return
+
+        #recusion
+        else:
+            for col in range(0,n):
+                slate.append(col)
+                find_all_helper(i+1,slate)
+                slate.pop()
+        return
+
+    find_all_helper(0,slate)
+    return result
+
+# print(len(find_all_arrangements(n=8)))
+
+#------------------------------Question-11-------------------
+'''
+Palindromic Decomposition Of A String
+Find all palindromic decompositions of a given string s.
+
+A palindromic decomposition of string is a decomposition of the string into substrings, such that all those substrings are valid palindromes.
+
+Example
+{
+"s": "abracadabra"
+}
+Output:
+
+["a|b|r|a|c|ada|b|r|a", "a|b|r|aca|d|a|b|r|a", "a|b|r|a|c|a|d|a|b|r|a"]
+'''
+
+def generate_palindromic_decompositions(s):
+    """
+    Args:
+     s(str)
+    Returns:
+     list_str
+    """
+    # Write your code here.
+
+    slate = []
+    result = []
+    def generate_palindromic(s,i,slate):
+
+        #backtracing case
+
+        def check_palindrome(s):
+            # if s!= s[::-1]:
+            #     return False
+            # return True
+        
+            mid = len(s)//2
+            for k in range(0,mid+1):
+                if s[k] != s[len(s)-k-1]:
+                    return False
+            return True
+
+        if len(slate)>0 and not check_palindrome(slate[-1]):
+                return 
+        #base case
+        if i ==len(s):
+            result.append("|".join(slate))
+
+        #recursive case
+        else:
+            for pick in range(i,len(s)):
+                slate.append(s[i:pick+1])
+                generate_palindromic(s,pick+1,slate)
+                slate.pop()
+
+        return
+    
+    generate_palindromic(s,0,slate)
+    return result
+
+print(generate_palindromic_decompositions("aab"))
+
+
+
+
+
+
+
+
+#TODO:
+'''
+1. Solve each problem as a Decision Problem ,Yes or No
+2. Solve each problem as a Count problem.
+
+'''
