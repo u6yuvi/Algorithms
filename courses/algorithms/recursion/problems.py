@@ -509,9 +509,10 @@ def generate_all_combinations(arr, target):
     def generate_all_cands_helper(arr,i,slate,target):
         
         #backtracking case
-        if sum(slate)==target:
-            result.append(slate[:])
-            return
+        if len(slate)>0:
+            if sum(slate[:])==target:
+                result.append(slate[:])
+                return
         
        
         if sum(slate)>target:
@@ -519,7 +520,7 @@ def generate_all_combinations(arr, target):
 
        
         #base case 
-        if i ==len(arr):
+        if i >=len(arr):
             #result.append(slate[:])
             return
         
@@ -544,7 +545,7 @@ def generate_all_combinations(arr, target):
 
 arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25]
 # print(sum(arr))
-# print(generate_all_combinations(arr,300))
+print(generate_all_combinations(arr,300))
 
 
 
@@ -737,14 +738,134 @@ def generate_palindromic_decompositions(s):
     generate_palindromic(s,0,slate)
     return result
 
-print(generate_palindromic_decompositions("aab"))
+# print(generate_palindromic_decompositions("aab"))
+
+
+#--------------------------Timed Test--------------------------------------------
+#Question-1
+
+'''
+Possible To Achieve Target Sum
+Given a set of integers and a target value k, find whether there is a non-empty subset that sums up to k.
+
+Example One
+{
+"arr": [2, 4, 8],
+"k": 6
+}
+Output:
+
+1
+Because 2 + 4 = 6.
+
+'''
+
+#Solution - Because it is asking for if any subset equals to target return True or False,we donot need to check for duplicates
+#Handle duplicates only when it is asked to generate all subsets that sums to target
+
+def check_if_sum_possible(arr, k):
+    """
+    Args:
+     arr(list_int64)
+     k(int64)
+    Returns:
+     bool
+    """
+    # Write your code here.
+    
+    
+    slate = []
+    result = []
+    arr = sorted(arr)
+    
+    def check_if_helper(arr,i,slate):
 
 
 
+        #backtracing case
+        if len(slate)>0:
+            if sum(slate[:]) == k:
+                result.append(slate[:])
+                return
+        
+        #base case
+        if i >=len(arr):
+            #result.append(sum(slate[:]))
+            return
+        
+        else:
+
+            #include
+            cnt = 0
+            cnt = len([j for j in arr if j == arr[i]])
+            
+            for pick in range(1,cnt+1):
+                slate.append(arr[i])
+                check_if_helper(arr,i+cnt,slate)
+                
+            for pick in range(1,cnt+1):
+                slate.pop()
+
+            #exclude case
+            check_if_helper(arr,i+1,slate)
+            
+        return
+    
+    
+    check_if_helper(arr,0,slate)
+        #recursion case
+    if result:
+        return result
+    return False
+
+# print(check_if_sum_possible([-4, -3, -1, 3, -3, -2, -1, -3, 4, -2, -3, -4, -4, -2, -1, 4, 3, -1],k=15))
 
 
+#Question-2
+def find_all_well_formed_brackets(n):
+    """
+    Args:
+     n(int32)
+    Returns:
+     list_str
+    """
+    # Write your code here.
+    
+    slate = []
+    nleft = n
+    nright=n
+    result = []
+    
+    def find_all_well_helper(nleft,nright,slate):
+        
+        #backtracking case
+        
+        if nleft>nright:
+            return
+        
+        #base case
+        if nleft==0 and nright==0:
+            result.append("".join(slate))
+            return
+        
+        
+        
+        #recrusive case
+        else:
+            if nleft>0:
+                slate.append("(")
+                find_all_well_helper(nleft-1,nright,slate)
+                slate.pop()
+            if nright>0:
+                slate.append(")")
+                find_all_well_helper(nleft,nright-1,slate)
+                slate.pop()
+        return
+    
+    find_all_well_helper(nleft,nright,slate)
+    return result
 
-
+# print(find_all_well_formed_brackets(3))
 
 #TODO:
 '''
