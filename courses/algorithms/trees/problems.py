@@ -1,4 +1,5 @@
 from utils import input_BinaryTreeNode_int32
+from utils import BinaryTreeNode
 
 """
 For your reference:
@@ -358,10 +359,310 @@ Space Complexity - Input + Aux + Ouptut
 '''
 
 
-data = {
-"root": [0,
-1, 2,
-3, 4]
-}
+#----------------------------Problem-8----------------------------------
 
-run(data,right_view)
+'''
+Preorder Traversal
+'''
+"""
+For your reference:
+class BinaryTreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+"""
+def preorder(root):
+    """
+    Args:
+     root(BinaryTreeNode_int32)
+    Returns:
+     list_int32
+    """
+    # Write your code here.
+    
+    result = []
+    if root is None:
+        return result
+    def preorder_helper(node):
+        if node.left is None and node.right is None:
+            result.append(node.value)
+            return 
+        #recursive case
+        isnode = False
+        if node.left is not None:
+            result.append(node.value)
+            isnode = not isnode
+            preorder_helper(node.left)
+        if node.right is not None:
+            if not isnode:
+            #if node.value not in result:
+                result.append(node.value)
+            preorder_helper(node.right)
+    
+    
+    preorder_helper(root)
+    return result
+
+#----------------------------Problem-8.1----------------------------------
+
+'''
+Preorder Traversal-Optimised
+'''
+
+def preorder(root):
+    """
+    Args:
+     root(BinaryTreeNode_int32)
+    Returns:
+     list_int32
+    """
+    # Write your code here.
+    
+    result = []
+    if root is None:
+        return result
+    def preorder_helper(node):
+        #base case
+        # if node.left is None and node.right is None:
+        #     result.append(node.value)
+        #     return 
+        #recursive case
+        result.append(node.value)
+        if node.left is not None:
+            preorder_helper(node.left)
+            # result.append(node.value)
+            # isnode = not isnode
+        if node.right is not None:
+            preorder_helper(node.right)
+    
+    
+    preorder_helper(root)
+    return result
+
+#----------------------------Problem-9----------------------------------
+
+'''
+Preorder Traversal-Optimised
+'''
+"""
+For your reference:
+class BinaryTreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+"""
+def inorder(root):
+    """
+    Args:
+     root(BinaryTreeNode_int32)
+    Returns:
+     list_int32
+    """
+    # Write your code here.
+    
+    result = []
+    if root is None:
+        return result
+    def inorder_helper(node):
+        #base case
+        # if node.left is None and node.right is None:
+        #     result.append(node.value)
+        #     return 
+        #recursive case
+        if node.left is not None:
+            inorder_helper(node.left)
+        result.append(node.value)
+        if node.right is not None:
+            inorder_helper(node.right)
+    
+    
+    inorder_helper(root)
+    return result
+
+
+
+#----------------------------Problem-10----------------------------------
+
+'''
+Postorder Traversal
+'''
+
+"""
+For your reference:
+class BinaryTreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+"""
+def postorder(root):
+    """
+    Args:
+     root(BinaryTreeNode_int32)
+    Returns:
+     list_int32
+    """
+    # Write your code here.
+    result = []
+    if root is None:
+        return result
+    def postorder_helper(node):
+
+        if node.left is not None:
+            postorder_helper(node.left)
+        if node.right is not None:
+            postorder_helper(node.right)
+        result.append(node.value)
+    
+    
+    postorder_helper(root)
+    return result
+
+
+#-----------------------------Problem-11-------------------------------------
+'''
+Convert Sorted List To Binary Search Tree
+'''
+
+def sorted_list_to_bst(head):
+    """
+    Args:
+     head(LinkedListNode_int32)
+    Returns:
+     BinaryTreeNode_int32
+    """
+    # Write your code here.
+    
+    if head is None:
+        return None
+    arr = head
+    def sorted_list_to_bst_helper(arr,start,end):
+        #base case
+        if start > end: #no node left
+            return None
+        
+        #recursive case
+        mid = start + (end-start)//2
+        newnode = BinaryTreeNode(arr[mid])
+        newnode.left = sorted_list_to_bst_helper(arr,start,mid-1)
+        newnode.right = sorted_list_to_bst_helper(arr,mid+1,end)
+        
+        return newnode
+    
+    res = sorted_list_to_bst_helper(arr,0,len(arr)-1)
+    
+    return res
+
+sorted_list = {
+"head": [-1, 2, 3, 5, 6, 7, 10]
+}
+#print(sorted_list_to_bst(sorted_list["head"]))
+
+
+#------------------------------------Problem-12------------------------------
+'''
+Construct A Binary Search Tree From Its Preorder Traversal
+'''
+"""
+For your reference:
+class BinaryTreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+"""
+def build_binary_search_tree(preorder):
+    """
+    Args:
+     preorder(list_int32)
+    Returns:
+     BinaryTreeNode_int32
+    """
+    # Write your code here.
+    
+    if not preorder:
+        return None
+    inorder = sorted(preorder)
+    hashmap = {value:idx for idx,value in enumerate(inorder)}
+    def build_binary_search_tree_helper(p,i,startp,endp,starti,endi):
+        if starti>endi:
+            return None
+        
+        #recursive case
+        #find mid
+        newnode = BinaryTreeNode(p[startp])
+        midi = hashmap[p[startp]]
+        num_left = midi -starti
+        numright = endi - midi
+        
+        newnode.left = build_binary_search_tree_helper(p,i,startp+1,startp+num_left,starti,midi-1)
+        newnode.right = build_binary_search_tree_helper(p,i,startp+1+num_left,endp,midi+1,endi)
+        
+        return newnode
+    
+    
+    res = build_binary_search_tree_helper(preorder,inorder,0,len(preorder)-1,0,len(inorder)-1)
+    return res
+    
+'''
+Time Complexity - Leaf + intermediate 
+                  Constnt +  O(n)
+Space Complexity - Input + Aux + Output
+                    O(n) + O(n) or O(logn) + O(n)
+'''
+
+
+
+"""
+For your reference:
+class BinaryTreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+"""
+def check_if_symmetric(root):
+    """
+    Args:
+     root(BinaryTreeNode_int32)
+    Returns:
+     bool
+    """
+    # Write your code here.
+    
+    #Approch -1 Using Level Order Traversal
+    
+    if root is None:
+        return True
+    result = True
+    q = [root]
+    while q:
+        len_q = len(q)
+        slate = []
+        for i in range(0,len_q):
+            newnode = q.pop(0)
+            slate.append(newnode.value)
+            if newnode.left is not None:
+                q.append(newnode.left)
+            else:
+                slate.append(-1)
+            if newnode.right is not None:
+                q.append(newnode.right)
+            else:
+                slate.append(-1)
+        
+        #check pallindrome
+        if slate != slate[::-1]:
+            result = False
+            break
+    return result
+
+
+data = {
+"root": [100,
+90, 90,
+70, 60, 60, 70]
+}
+run(data,check_if_symmetric)

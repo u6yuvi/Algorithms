@@ -36,3 +36,9 @@ def input_BinaryTreeNode_int32(data):
             nodes_with_uninitialized_children.extend([new_node, new_node])
     return argument
 
+
+class BinaryTreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
