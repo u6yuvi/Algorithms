@@ -11,9 +11,9 @@ class BinaryTreeNode:
         self.right = None
 """
 
-def run(data,func,a,b):
+def run(data,func,**args):
     root = input_BinaryTreeNode_int32(data["root"])
-    print(func(root,a,b))
+    print(func(root,**args))
 #-------------------Problem-1--------------------------------------------------
 '''
 Level Order Traversal on Binary Tree
@@ -717,6 +717,12 @@ def lca(root, a, b):
         return globalfound[0]
     return 0
 
+# data ={
+# "root": [1, None,
+# 3, 2, 5, None,
+# None, None, 4]
+# }
+# run(data,lca,2,1)
 
 #----------------------------Problem-15--------------------------------
 '''
@@ -754,11 +760,55 @@ class Solution:
     
         return res
 
+#----------------------------Problem-16--------------------------------
+'''
+Kth Smallest Element Of BST
+'''
+"""
+For your reference:
+class BinaryTreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+"""
+def kth_smallest_element(root, k):
+    """
+    Args:
+     root(BinaryTreeNode_int32)
+     k(int32)
+    Returns:
+     int32
+    """
+    # Write your code here.
+    
+    if root is None:
+        return 0
+    globalk = [k]
+    result = []
+    def dfs(node):
+        
+        #base case 
+        if node.left is None and node.right is None:
+            pass
+
+        #recursive case
+        if node.left:
+            dfs(node.left)
+        
+        globalk[0] = globalk[0] -1
+        if globalk[0]==0:
+            result.append(node.value)
+        if node.right:
+            dfs(node.right)
+    
+    dfs(root)
+    if result:
+        return result[0]
+    return 0
 
 
 data ={
-"root": [1, None,
-3, 2, 5, None,
-None, None, 4]
+"root": [5,3,6,2,4,None,None,1]
 }
-run(data,lca,2,1)
+run(data,kth_smallest_element,k=3)

@@ -11,9 +11,13 @@
 - Zig-Zag Level Orer Traversal
 
 ## Bottom Up DFS 
+### PostOrder Traversal
 - Diameter of the Binary Tree
 - Count Univalue Subtrees
--  Maximum Depth of N-ary Tree
+- Maximum Depth of N-ary Tree
+- Lowest Common Ancestor
+### InOrder Traversal
+- Kth Smallest Element Of BST
 
 ## Top Down DFS
 - Print all paths that sum to k 
