@@ -1,5 +1,6 @@
 from utils import input_BinaryTreeNode_int32
 from utils import BinaryTreeNode
+from typing import List
 
 """
 For your reference:
@@ -10,11 +11,9 @@ class BinaryTreeNode:
         self.right = None
 """
 
-def run(data,func):
+def run(data,func,a,b):
     root = input_BinaryTreeNode_int32(data["root"])
-    print(func(root))
-
-
+    print(func(root,a,b))
 #-------------------Problem-1--------------------------------------------------
 '''
 Level Order Traversal on Binary Tree
@@ -614,7 +613,7 @@ Space Complexity - Input + Aux + Output
 '''
 
 
-
+#-------------------------------Problem-13------------------------------------  Not resolved
 """
 For your reference:
 class BinaryTreeNode:
@@ -660,9 +659,106 @@ def check_if_symmetric(root):
     return result
 
 
-data = {
-"root": [100,
-90, 90,
-70, 60, 60, 70]
+#------------------------Problem-14----------------------------------------
+"""
+For your reference:
+class BinaryTreeNode:
+    def __init__(self, value):
+        self.value = value
+        self.left = None
+        self.right = None
+"""
+def lca(root, a, b):
+    """
+    Args:
+     root(BinaryTreeNode_int32)
+     a(BinaryTreeNode_int32)
+     b(BinaryTreeNode_int32)
+    Returns:
+     int32
+    """
+    # Write your code here.
+    globalfound = []
+    def dfs(node):
+        afound , bfound = False,False
+        #base case
+        if node.left is None and node.right is None:
+            if node.value == a:
+                afound = True
+            if node.value == b:
+                bfound = True
+            if afound and bfound and not globalfound:
+                globalfound.append(node.value)
+            return (afound,bfound)
+        
+        #recursive case
+
+        if node.value == a:
+            afound = True
+        if node.value == b:
+            bfound = True
+        
+        if node.left:
+            p,q = dfs(node.left)
+            afound = afound or p
+            bfound = bfound or q
+        if node.right:
+            p,q = dfs(node.right)
+            bfound = bfound or q
+            afound = afound or p
+            
+        if afound and bfound and not globalfound:
+            globalfound.append(node.value)
+            
+        return afound , bfound
+            
+    dfs(root)
+    if globalfound:
+        return globalfound[0]
+    return 0
+
+
+#----------------------------Problem-15--------------------------------
+'''
+559. Maximum Depth of N-ary Tree
+'''
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def maxDepth(root) -> int:
+
+        globalsol = []
+        def dfs(node):
+            if node is None :
+                return 0
+            
+            #recursive case
+            lr =rr = 0
+            for child in node.children:
+                lr = dfs(child)
+                if lr  > rr:
+                    rr = lr
+            if globalsol:
+                globalsol[0]= max(globalsol[0],rr+1) 
+            else:
+                globalsol.append(rr+1)
+            return rr +1
+        
+        res = dfs(root)
+    
+        return res
+
+
+
+data ={
+"root": [1, None,
+3, 2, 5, None,
+None, None, 4]
 }
-run(data,check_if_symmetric)
+run(data,lca,2,1)

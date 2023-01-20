@@ -1,12 +1,27 @@
 # Problems
-1. Preorder Traversal of a Binary Tree
-2. Inorder Traversal of a Binary Tree
-3. Postorder Traversal of a Binary Tree
-4. Level Order Traversal on Binary Tree
-5. Level Order Traversal for N-ary tree
-6. Right side view of the binary tree
-7. Reverse Level Order Traversal
-8. Zig-Zag Level Orer Traversal
-9. Diameter of the Binary Tree
-10. Print all paths that sum to k 
-11. Root To Leaf Path Sum Equal To K
+## DFS
+- Preorder Traversal of a Binary Tree
+- Inorder Traversal of a Binary Tree
+- Postorder Traversal of a Binary Tree
+## BFS
+- Level Order Traversal on Binary Tree
+- Level Order Traversal for N-ary tree
+- Right side view of the binary tree
+- Reverse Level Order Traversal
+- Zig-Zag Level Orer Traversal
+
+## Bottom Up DFS 
+- Diameter of the Binary Tree
+- Count Univalue Subtrees
+-  Maximum Depth of N-ary Tree
+
+## Top Down DFS
+- Print all paths that sum to k 
+- Root To Leaf Path Sum Equal To K
+- Binary Tree Longest Consecutive Sequence[TODO]
+- Path Sum II
+- Path Sum III
+
+## Tree Construction
+- Convert Sorted arrays to Binary Search Tree
+- Construct Binary Tree from Preorder Traversal
