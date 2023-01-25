@@ -126,7 +126,7 @@ data = {
 "edge_start": [0, 0, 0],
 "edge_end": [1, 2, 3]
 }
-print(is_it_a_tree(data["node_count"],data["edge_start"],data["edge_end"]))
+# print(is_it_a_tree(data["node_count"],data["edge_start"],data["edge_end"]))
 
 
 
@@ -184,3 +184,65 @@ def can_be_divided(num_of_people, dislike1, dislike2):
             if bfs(i) is False:
                 return False
     return True
+
+
+#---------------------------Problem-3-------------------------------
+def can_be_completed(n, a, b):
+    """
+    Args:
+     n(int32)
+     a(list_int32)
+     b(list_int32)
+    Returns:
+     bool
+    """
+    # Write your code here.
+    
+    #build the graph
+    adjlist = [[] for i in range(n)]
+    visited = [-1]*n
+    arrival = [-1]*n
+    departure = [-1]*n
+    timestamp = [0]
+    #directed graph
+    for (src,dst) in zip(a,b):
+        adjlist[dst].append(src)
+    
+    #dfs with rrival departure recording
+    def dfs(node):
+        arrival[node] = timestamp[0] 
+        timestamp[0] = timestamp[0] +1
+        visited[node]=1
+        for neighbour in adjlist[node]:
+            if visited[neighbour]==-1:
+                if dfs(neighbour) is True:
+                    return True #cycle found so course not possible
+            elif departure[neighbour]==-1:
+                    return True
+        departure[node] = timestamp[0]
+        timestamp[0] = timestamp[0]+1
+        
+        return False
+        
+    #outer loop
+    for i in range(0,n):
+        if visited[i]==-1:
+            if dfs(i) is True:
+                return False
+    
+    
+    return True
+
+data = {
+"n": 4,
+"a": [1, 1, 3, 0],
+"b": [0, 2, 1, 3]
+}
+print(can_be_completed(data["n"],data["a"],data["b"]))
+'''
+{
+"n": 3,
+"a": [0, 1, 2],
+"b": [1, 2, 0]
+}
+'''

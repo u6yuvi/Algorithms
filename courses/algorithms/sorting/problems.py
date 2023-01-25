@@ -577,4 +577,57 @@ def find_top_k_frequent_elements(arr, k):
     print(arr1)  
     return arr1[len(arr1)-k:]
 
-print(find_top_k_frequent_elements( [1, 2, 3, 2, 4, 3, 1],2))
+# print(find_top_k_frequent_elements( [1, 2, 3, 2, 4, 3, 1],2))
+
+
+def fruits(fruits):
+
+    #Brute Force O(n^2)
+    # max_lst= []
+    # for i in range(0,len(fruits)):
+    #     fruit_typs = []
+    #     j = i
+    #     max = 0
+    #     while j <len(fruits):
+    #         if fruits[j] not in fruit_typs:
+    #             fruit_typs.append(fruits[j])
+    #         if len(fruit_typs)>2:
+    #             break
+    #         else:
+    #             max+=1
+    #             j+=1
+    #     max_lst.append(max)
+    # return max(max_lst)
+
+
+    start = 0
+    end = 0
+    fruits_map= {}
+    max_lst = []
+    # for i in range(0,len(fruits)):
+    #     if fruits[i] in fruits_map:
+    #         end+=1
+    #         fruits_map[fruits[i]] +=1
+    #     elif fruits[i] not in fruits_map and len(fruits_map)<2:
+    #         end+=1
+    #         fruits_map[fruits[i]] = 1
+    #     else:
+    #         max1 = end-start
+    #         fruits_map.pop(fruits[start])
+    #         end+=1
+    #         start+=1
+    #         max_lst.append(max1)
+    #         fruits_map[fruits[i]] = 1
+    # #max_lst.append(len(fruits_lst))
+    # return max(max_lst)
+            
+
+    while end<len(fruits):
+        if fruits[end] in fruits_map:
+            end+=1
+
+
+print(fruits([3,3,3,1,2,1,1,2,3,3,4]))
+
+
+
