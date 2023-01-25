@@ -4,6 +4,7 @@
     - Using Depth First Search
     - Using breadth First Search
 2. Count number of connected components in a graph
-3. Is a tree
+3. Given an undirected graph, find out whether it is a tree.
     - Using Depth First Search
     - Using Breadth First Search
+4. 
