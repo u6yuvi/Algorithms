@@ -8,8 +8,12 @@
     - Using Depth First Search
     - Using Breadth First Search
 4. Course Schedule
-5. Count Islands [TODO]
+5. Count Islands [Check]
 6. Find Largest Island
 7. Flood Fill
 8. Find Town Judge
 9. Course Schedule II
+10. Rotting Oranges[Check]
+11. Knight's Tour On A Chessboard 
+11.1. Knight's Tour On A Chessboard[Optimised]
+    How to Show paths?

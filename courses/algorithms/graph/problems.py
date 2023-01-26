@@ -332,7 +332,7 @@ data = {
 [0, 1]
 ]
 }
-print(count_islands(data["matrix"]))
+# print(count_islands(data["matrix"]))
 
 
 #---------------------------Problem-5-------------------------------
@@ -540,7 +540,7 @@ data = {
 [5, 2]
 ]
 }
-print(find_town_judge(data["n"],data["trust"]))
+# print(find_town_judge(data["n"],data["trust"]))
 
 
 #---------------------------Problem-8-------------------------------
@@ -606,7 +606,7 @@ def course_schedule(n, prerequisites):
 
 
 
-
+#---------------------------Problem-9-------------------------------[Few Test Case Failing]
 def rotting_oranges(grid):
     """
     Args:
@@ -673,4 +673,121 @@ data = {
 ]
 }
 
-print(rotting_oranges(data["grid"]))
+# print(rotting_oranges(data["grid"]))
+
+#---------------------------Problem-10-------------------------------[Few Test Case Failing]
+
+
+def find_minimum_number_of_moves(rows, cols, start_row, start_col, end_row, end_col):
+    """
+    Args:
+     rows(int32)
+     cols(int32)
+     start_row(int32)
+     start_col(int32)
+     end_row(int32)
+     end_col(int32)
+    Returns:
+     int32
+    """
+    # Write your code here.
+    
+    #build the graph
+    grid = [[-1 for i in range(cols)] for j in range(rows)]
+    distance = [0]
+
+    def get_moves(x,y):
+        result = []
+        [(2,1),(2,-1),[1,2],[-1,2],(-2,1),(-2,-1),(-1,-2),(1,-2)]
+        x_grid = [2,2,1,-1,-2,-2,-1,1]
+        y_grid = [1,-1,2,2,1,-1,-2,-2]
+        for i,j in zip(x_grid,y_grid):
+            new_x = i+x
+            new_y = j+y
+            if 0<= new_x < rows and 0<= new_y<cols:
+                result.append((new_x,new_y))
+        return result
+
+    def bfs(source):
+        q = [source]
+        grid[source[0]][source[1]] = distance[0]
+        while q:
+            distance[0] = distance[0]+1
+            cnt = len(q)
+            for i in range(cnt):
+                node = q.pop(0)
+                for x,y in get_moves(node[0],node[1]):
+                    if grid[x][y]== -1:
+                        grid[x][y]=distance[0]
+                        q.append((x,y))
+    
+    bfs((start_row,start_col))
+    
+    if grid[end_row][end_col] ==-1:
+        return -1
+    return grid[end_row][end_col]
+
+print(find_minimum_number_of_moves(5,5,0,0,4,1))
+
+
+#---------------------------Problem-10.1-------------------------------[Few Test Case Failing]
+'''
+Optimised version where shot circuiting once the end row and end column found. No further exploration
+'''
+def find_minimum_number_of_moves_optimised(rows, cols, start_row, start_col, end_row, end_col):
+    """
+    Args:
+     rows(int32)
+     cols(int32)
+     start_row(int32)
+     start_col(int32)
+     end_row(int32)
+     end_col(int32)
+    Returns:
+     int32
+    """
+    #Shot Circuit to not explore all positions
+    #build the graph
+    grid = [[-1 for i in range(cols)] for j in range(rows)]
+    distance = [0]
+
+    def get_moves(x,y):
+        result = []
+        [(2,1),(2,-1),[1,2],[-1,2],(-2,1),(-2,-1),(-1,-2),(1,-2)]
+        x_grid = [2,2,1,-1,-2,-2,-1,1]
+        y_grid = [1,-1,2,2,1,-1,-2,-2]
+        for i,j in zip(x_grid,y_grid):
+            new_x = i+x
+            new_y = j+y
+            if 0<= new_x < rows and 0<= new_y<cols:
+                result.append((new_x,new_y))
+        return result
+
+    def bfs(source):
+        q = [source]
+        grid[source[0]][source[1]] = distance[0]
+        while q:
+            distance[0] = distance[0]+1
+            cnt = len(q)
+            for i in range(cnt):
+                node = q.pop(0)
+                for x,y in get_moves(node[0],node[1]):
+                    if grid[x][y]== -1:
+                        grid[x][y]=distance[0]
+                        if x==end_row and y == end_col:
+                            return grid[end_row][end_col]
+                        q.append((x,y))
+        return grid[end_row][end_col]
+    
+    # bfs((start_row,start_col))
+    
+    # if grid[end_row][end_col] ==-1:
+    #     return -1
+    # return grid[end_row][end_col]
+
+    res = bfs((start_row,start_col))
+    if res!=-1:
+        return res
+    return -1
+    
+print(find_minimum_number_of_moves_optimised(1,1,0,0,0,0))
