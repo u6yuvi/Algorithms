@@ -273,32 +273,32 @@ def count_islands(matrix):
         neighbours = []
         if x+1 < len(matrix):
             neighbours.append((x+1,y))
-        if x+2 < len(matrix):
-            neighbours.append((x+2,y))
+        # if x+2 < len(matrix):
+        #     neighbours.append((x+2,y))
         if x-1 >=0 :
             neighbours.append((x-1,y))
-        if x-2 >= 0:
-            neighbours.append((x-2,y))
+        # if x-2 >= 0:
+        #     neighbours.append((x-2,y))
         
         
         #vertical neighbours
         if y+1 < len(matrix[0]):
             neighbours.append((x,y+1))
-        if y+2 < len(matrix[0]):
-            neighbours.append((x,y+2))
+        # if y+2 < len(matrix[0]):
+        #     neighbours.append((x,y+2))
         if y-1 >=0 :
             neighbours.append((x,y-1))
-        if y-2 >= 0:
-            neighbours.append((x,y-2))
+        # if y-2 >= 0:
+        #     neighbours.append((x,y-2))
         #diagonal
-        if x+1 <len(matrix) and y+1 <len(matrix[0]):
-           neighbours.append((x+1,y+1))
-        if x+2 <len(matrix) and y+2 <len(matrix[0]):
-           neighbours.append((x+2,y+2)) 
-        if x-1 >=0 and y-1 >=0:
-           neighbours.append((x-1,y-1))
-        if x-2 >=0 and y-2 >=0:
-           neighbours.append((x-2,y-2))
+        # if x+1 <len(matrix) and y+1 <len(matrix[0]):
+        #    neighbours.append((x+1,y+1))
+        # if x+2 <len(matrix) and y+2 <len(matrix[0]):
+        #    neighbours.append((x+2,y+2)) 
+        # if x-1 >=0 and y-1 >=0:
+        #    neighbours.append((x-1,y-1))
+        # if x-2 >=0 and y-2 >=0:
+        #    neighbours.append((x-2,y-2))
         return neighbours
     
     #bfs traversal
@@ -328,14 +328,8 @@ def count_islands(matrix):
 
 data = {
 "matrix": [
-[1],
-[1],
-[1],
-[0],
-[1],
-[1],
-[1],
-[1]
+[1, 0],
+[0, 1]
 ]
 }
 print(count_islands(data["matrix"]))
@@ -479,4 +473,204 @@ data = {
 ]
 }
 
-flood_fill
+
+# print(flood_fill(data["pixel_row"],data["pixel_column"],data["new_color"],data["image"]))
+
+#---------------------------Problem-7-------------------------------
+def find_town_judge(n, trust):
+    """
+    Args:
+     n(int32)
+     trust(list_list_int32)
+    Returns:
+     int32
+    """
+    # Write your code here.
+    
+    
+    # build the tree
+    adjlist = [[] for i in range(n)]
+    arrival = [-1]*n
+    departure = [-1]*n
+    visited = [-1]*n
+    time = [0]
+    #directed graph
+    for (src,dst) in trust:
+        adjlist[src-1].append(dst-1)
+        
+    
+    #dfs traversal
+    def dfs(node):
+        arrival[node] = time[0]
+        time[0] = time[0] +1
+        visited[node] = 1
+        for neighbour in adjlist[node]:
+            if visited[neighbour]==-1:
+                visited[neighbour]=1
+                if dfs(neighbour) is True:
+                    return True#cycle found
+            elif departure[neighbour]==-1:
+                return True #cycle found
+    
+        time[0] = time[0]+1
+        departure[node] = time[0]
+        return False
+    
+    #outer loop
+    
+    for i in range(0,n):
+        if visited[i]==-1:
+            if dfs(i) is True: # if cyclees found then no judge
+                return -1
+    
+    
+    if departure:
+        res = departure.index(min(departure))+1
+    for i in range(n):
+        if i !=res:
+            if res not in adjlist[i]:
+                return -1
+    return res
+
+data = {
+"n": 5,
+"trust": [
+[1, 2],
+[3, 2],
+[5, 2]
+]
+}
+print(find_town_judge(data["n"],data["trust"]))
+
+
+#---------------------------Problem-8-------------------------------
+'''
+Course Schedule II
+'''
+
+'''
+If cycles found not possible
+Time Complexity - O(m+n)
+'''
+def course_schedule(n, prerequisites):
+    """
+    Args:
+     n(int32)
+     prerequisites(list_list_int32)
+    Returns:
+     list_int32
+    """
+    # Write your code here.
+    
+    
+    # build the tree
+    adjlist = [[] for i in range(n)]
+    arrival = [-1]*n
+    departure = [-1]*n
+    visited = [-1]*n
+    time = [0]
+    result_array = []
+    #directed graph
+    for (src,dst) in prerequisites:
+        adjlist[dst].append(src)
+        
+    
+    #dfs traversal
+    def dfs(node):
+        arrival[node] = time[0]
+        time[0] = time[0] +1
+        visited[node] = 1
+        for neighbour in adjlist[node]:
+            if visited[neighbour]==-1:
+                visited[neighbour]=1
+                if dfs(neighbour) is True:
+                    return True#cycle found
+            elif departure[neighbour]==-1:
+                return True #cycle found
+    
+        time[0] = time[0]+1
+        departure[node] = time[0]
+        result_array.append(node)
+        return False
+    
+    #outer loop
+    
+    for i in range(0,n):
+        if visited[i]==-1:
+            #dfs(i)
+            if dfs(i) is True: # if cyclees found 
+                return [-1]
+    if result_array:
+        return result_array[::-1]
+    return [-1]
+
+
+
+
+def rotting_oranges(grid):
+    """
+    Args:
+     grid(list_list_int32)
+    Returns:
+     int32
+    """
+    # Write your code here.
+    
+    
+    # traverse
+    
+    res = [0]
+    
+    def get_neighbours(x,y):
+        result = []
+        if x+1 <len(grid):
+            if grid[x+1][y] !=0:
+                result.append((x+1,y))
+        if x-1 >=0:
+            if grid[x-1][y]!=0:
+                result.append((x-1,y))
+                
+        if y+1 <len(grid[0]):
+            if grid[x][y+1]!=0:
+                result.append((x,y+1))
+        if y-1 >=0:
+            if grid[x][y-1]!=0:
+                result.append((x,y-1))
+        return result
+    
+    #traversal
+    def bfs():
+        q = []
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j]==2:
+                    q.append((i,j))
+        while q:
+            res[0] = res[0]+1
+            size = len(q)
+            for i in range(size):
+                node = q.pop(0)
+                for x1,y1 in get_neighbours(node[0],node[1]) :
+                    if grid[x1][y1]==1:
+                        grid[x1][y1]=2
+                        #result[0] = result[0]+1
+                        q.append((x1,y1))   
+    
+    bfs()
+    for i in range(len(grid)):
+        for j in range(len(grid[0])):
+            if grid[i][j]==1:
+                return -1
+    
+    if res[0]>0:
+        return res[0]-1
+    return 0
+    
+
+data = {
+"grid": [
+[0]
+]
+}
+
+print(rotting_oranges(data["grid"]))
