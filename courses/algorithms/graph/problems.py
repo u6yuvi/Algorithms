@@ -727,7 +727,7 @@ def find_minimum_number_of_moves(rows, cols, start_row, start_col, end_row, end_
         return -1
     return grid[end_row][end_col]
 
-print(find_minimum_number_of_moves(5,5,0,0,4,1))
+# print(find_minimum_number_of_moves(5,5,0,0,4,1))
 
 
 #---------------------------Problem-10.1-------------------------------[Few Test Case Failing]
@@ -790,4 +790,71 @@ def find_minimum_number_of_moves_optimised(rows, cols, start_row, start_col, end
         return res
     return -1
     
-print(find_minimum_number_of_moves_optimised(1,1,0,0,0,0))
+# print(find_minimum_number_of_moves_optimised(1,1,0,0,0,0))
+
+
+
+
+def get_all_shortest_transformation_sequences(start_word, target_word, words):
+    """
+    Args:
+     start_word(str)
+     target_word(str)
+     words(list_str)
+    Returns:
+     list_list_str
+    """
+    # Write your code here.
+    visited = [-1]*len(words)
+    result = [0]
+    path = []
+    wrd2idx = {wrd:idx for idx,wrd in enumerate(words)}
+    parent = [-1]*len(words)
+    parents = []
+
+    def get_neighbours(text):
+        result = []
+        for wrd in words:
+            diff_sum = [ 1 for t_char,wrd_char in zip(text,wrd) if t_char !=wrd_char ]
+            if sum(diff_sum)==1:
+                result.append(wrd)
+        return result
+
+    def bfs(source):
+        q = [source]
+        path.append(source)
+        #visited[wrd2idx[source]]=1
+        while q:
+           
+            parent = [-1]*len(words)
+            cnt = len(q)
+            result[0] = result[0] +1
+            for i in range(cnt):
+                node = q.pop(0)
+                for neighbour in get_neighbours(node):
+                    if visited[wrd2idx[neighbour]]==-1:
+                        parent[wrd2idx[neighbour]] = node
+                        visited[wrd2idx[neighbour]]= 1
+                        if neighbour == target_word:
+                            parents.append(parent)
+                            return True
+                        q.append(neighbour)
+            parents.append(parent)
+        return False
+
+    res = bfs(start_word)
+
+        #print(result)
+            
+data = {
+"start_word": "hot",
+"target_word": "dog",
+"words": ["cat", "dog", "hat", "dot", "cot", "hog"]
+}
+print(get_all_shortest_transformation_sequences(data["start_word"],data["target_word"],data["words"]))
+
+
+
+def alien_text(words):
+
+    {"b":[]}
