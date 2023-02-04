@@ -110,4 +110,69 @@ def unique_paths(n, m):
     
     return table[n-1][m-1]
 
-print(unique_paths(3,2))
+# print(unique_paths(3,2))
+
+
+
+
+
+def word_break(s, words_dictionary):
+    """
+    
+    # Recursive Implementation
+    Args:
+     s(str)
+     words_dictionary(list_str)
+    Returns:
+     bool
+    """
+    # Write your code here.
+    res = [False]
+    if len(s)==1:
+        if s in words_dictionary:
+            return True
+        return False
+    def word(str1,k):
+        #base case
+        if len(str1[k:])==1:
+            if str1[k:] in words_dictionary:
+                return True
+            return False
+        #base case
+        if len(str1[k:])==0:
+            return True
+        
+        #recursive case
+        result = []
+        for i in range(1,len(str1[k:])+1):
+            my_elem = str1[k:k+i]
+            my_result = True
+            if my_elem not in words_dictionary:
+                continue
+            #slate.append(str1[k+i:])
+            result.append(word(str1,k+i))
+            #slate.pop()
+        
+
+        
+        if any(result):
+            res[0] = True
+        return res[0]
+
+    word(s,0) 
+    return res[0]
+
+data = {
+"s": "interviewkickstart",
+"words_dictionary": ["interview", "preparation"]
+}
+
+print(word_break(data["s"],data["words_dictionary"]))
+
+
+# a = True
+# b =  False
+# print(a and b )
+# a = [True,True]
+# if all(a) is True:
+#     print("A")
