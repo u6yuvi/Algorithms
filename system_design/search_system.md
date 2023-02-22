@@ -27,14 +27,15 @@ Distinct words ~500k
 
 If we look at one column, as avg 1000 words /document ,so only 1000 rows will be 1 and remaining ~499k rows will be 0.
 
-Use Adjacency List<br>
-1. For each term t, we must store a list of all documents[doc_id] in the **increasing order** that contains t.<br>
+#### Use Adjacency List<br>
+1. For each term t, we must store a list of all documents[doc_id] in the **increasing order** that contains t.
 2. The adjlist of every term[word] will not be of fixed size.
+3. This adjlist containing doc_ids are also called Posting List and individual element is called Posting.
 
 [TODO Image]
 
-### Inverted Index
-This representation of term and doc_id in increasing order in the adjlist.
+### Inverted Index/Search Index
+This representation of term and unique doc_id in increasing order in the adjlist.
 
 **AND Operation on Inverted Index**<br>
 Looking at the example below:
@@ -54,6 +55,29 @@ NOT Ceasar<br>
 2. For each index, fill the result table with the missing doc_ids. result = [1,3,4]
 
 T(n) = O(D) where D= No of documents
+
+## Inverted Index Representation in Memory vs Disk
+
+In meomry for faster reads,
+Inverted index  could be represented using **dictionary** data structure with the underlying implementation as hashtable or balanced binary tree.<br>
+Key - Terms [Hash index]
+Value - Posting Lists ,an array containing the doc ids 
+
+__Difference between Inverted Index/Search Index and DB Index__
+
+Database index is a key value record where key is some primary key with value representing the location of a particular record in the relation file.
+
+Whereas Search index in memory, key could point to million or billion of document ids present in the posting list.
+
+When we move to larger corpus,Search index will be too large in size to fit in the main memory of a single machine,and we will use disk for storage.
+
+**Inverted Index construction on Disk**
+
+1. The posting list will be stored in the disk as a posting file [ think of the posting lists laid down sequentially with the offset being the start position of the posting list in this file.]
+2. The dictionary part will be in memory where key represents the terms and values - pointers to the offsets in disk where the actual values for those keys are stored.
+
+Inverted Index on Disk 
+
 
 ## Handling Scale Issues
 
