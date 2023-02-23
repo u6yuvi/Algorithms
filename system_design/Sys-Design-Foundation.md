@@ -93,5 +93,76 @@ Here, latency is a measure of network performance.
 	
 Total delay of the packet - Transmission Time + Propogation Delay + Queueing Delay
 
+How large can a propogation delay could be?
+Circumference of the earth ~ 40,000 km <br>
+Speed of light in optical fibre - 2x10^8 m/sec <br>
+Propogation time one way = 40,000 x 10^3 m/ 2 x 10^8 m/s = 0.2 sec ~ 200 ms
+
+Also , the actual path will not be a straight line, there will be multiple routers en route and will also include queueing time. So , propogation time [one way] would be higher than 200 ms.
+
+_Scenario -1_ <br>
+So for a lighter request packet with server service time being 10 ms, a user closer to the server would recieve faster response as compared to user who is far away on the other side of the earth.<br>
+Response time is dominated by the propogation delay.
+
+_Scenario-2_ <br>
+But if we consider a request packet of 25 MB, <br>
+Given,Bandwith = 10 Mbps <br>
+Transmission Time  = 25 x 10 ^6 x 8  / 10 x 10^6 = 20 sec <br>
+
+Here, increasing the bandwidth , will reduce the transmission time.<br>
+Response time is dominated by the transmission time.
+
+## Reverse and Forward Proxy
+A proxy is an intermediary between the client and server.
+![](images/forward-reverse-proxy.jpeg)
+
+### Reverse Proxy
+1. It is the server side proxy
+2. Load Balancer could act as a reverse proxy
+3. Handles decryption of incoming request and encryption of outgoing response.
+4. Equipped with increased securtiy features as outside world interacts with reverse proxy as the application servers are not visible to the outside world.
+
+### Forward Proxy
+1. It is the client side proxy.
+2. Act as a web cache , where if one client tries to access webpage already accessed before,could retrieve it from the cache ,rather than sending the request again.
+3. Content Filtering -Prevents unauthorised access to unsafe webpages.
+
+
+## Load Balancing 
+Load Balancer could be hardware based or software based.For our discussion we will only consider software load balancer.
+
+Load Balancer work is minimal as compared to individual application servers and hence a single load balancer can handle 100s to 1000s of application servers.
+
+Guesstimate - A load balancer handles 100k - 1M qps
+
+
+Usage of Load Balancer<br>
+1. Increase Throughput
+2. Increase Availability - No single point of failure.
+
+Policy for Sending Request to servers:
+
+1. Round Robin or Random
+2. Least number of active connections or Least response time or a combination of both with some weightage.
+3. Hashing
+
+
+DNS based Load Balancing - 
+Allows load balancing across different load balancers within or across data centres.
+DNS has a list of Load Balancer IP addresses mapped to a incoming single server address.So using the above policies we can make a call to one or more load balancers.
+
+Different Setup Design for Load Balancer
+
+![](images/load-balancer.jpeg)
+
+1. Load balancer with a passive backup load balancer. Two different hardware machines sharing the same IP address to handle availbility.
+2. Multiple Active Load Balancers with independent IP addresses to handle throughput.
+3. Multiple Active load Balancers with Passive Backup Load Balancers to handle both increased throughput and incresed availability.
+4. Same setup can be spanned across Data Centres where in case of failure of one Data Centre servers, traffic gets handled by other Data Centre servers.
+
+
+
+  
+
 
 
