@@ -79,15 +79,15 @@ Here, latency is a measure of network performance.
 
 #### Other measures of Network Performance
 
-1. Bandwidth [Data Rate]- No of bits that can be transmitted  over the network per second.
+1. Bandwidth [Data Rate]- No of bits that can be transmitted  over the network per second.It is the best available performance. The actual performance is measured through throughput.
 
 	Assuming 10Mbps = 10 million bits/s
 	For 1 bit = 1/ (10^7) = 0.1 \mus
 
-2. Transmission time - $Size of the message / Bandwidth$
-3. Propogation Delay - $Distance / Speed of Light$
-	Speed of Light - 3 x 10^8 m/s -> Vaccum
-					  - 2 x 10^8 m/s -> Optical Fibre
+2. Transmission time - Size of the message / Bandwidth
+3. Propogation Delay - Distance / Speed of Light <br>
+	Speed of Light Vaccum- 3 x 10^8 m/s  <br>
+	Speed of Light Optical Fibre - 2 x 10^8 m/s
 
 4. Queueing Delay 
 	
