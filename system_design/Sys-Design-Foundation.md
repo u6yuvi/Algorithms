@@ -62,7 +62,7 @@ Defining SLIs (Servive Level Indicators):
 A quantitative measure of the level of service being provided.
 
 1. **Correctness** - Is the right answer/data bbeing returned?. Error rate as a raction of all requests.
-2. **Avaialbility** - Could we respond to the request? Fraction of time that a service is usable. Fraction of well-formed requests that succeeds.
+2. **Availability** - Could we respond to the request? Fraction of time that a service is usable. Fraction of well-formed requests that succeeds.
 	99% = 2nines , 99.999% = 5 nines , 3 1/2 nines = 99.95
 	
 3. **System Throughput** - The no, of requests/sec that could be handled by a server.
@@ -128,6 +128,9 @@ A proxy is an intermediary between the client and server.
 3. Content Filtering -Prevents unauthorised access to unsafe webpages.
 
 
+
+
+## Scaling the Stateless System using Replication- App Tier
 ## Load Balancing 
 Load Balancer could be hardware based or software based.For our discussion we will only consider software load balancer.
 
@@ -137,8 +140,10 @@ Guesstimate - A load balancer handles 100k - 1M qps
 
 
 Usage of Load Balancer<br>
+
 1. Increase Throughput
 2. Increase Availability - No single point of failure.
+3. Reduces Response time [IP Anycast]
 
 Policy for Sending Request to servers:
 
@@ -158,11 +163,91 @@ Different Setup Design for Load Balancer
 1. Load balancer with a passive backup load balancer. Two different hardware machines sharing the same IP address to handle availbility.
 2. Multiple Active Load Balancers with independent IP addresses to handle throughput.
 3. Multiple Active load Balancers with Passive Backup Load Balancers to handle both increased throughput and incresed availability.
-4. Same setup can be spanned across Data Centres where in case of failure of one Data Centre servers, traffic gets handled by other Data Centre servers.
+4. Global Load Balancing -Same setup can be spanned across Data Centres where in case of failure of one Data Centre servers, traffic gets handled by other Data Centre servers.
 
+## IP Anycasting
+
+![](images/ip-anycasting.jpeg)
+Approach to Global Load Balancing with objective to reduce the response time.
+
+To apply this approach, the company should own the data centres,routers and links on the internet. 
+
+Different Data Centre Servers across different geographical location are given the same IP address. Router directs the traffic to the next hop link whcih lies in the closest path to reach the destination data server.
+Each router knows the Closest data centre by running the Dijkstra's algorithm using the neighbour information broadcasted by its neighbouring routers. 
+
+In case of outage in one of the data centres,routers re-routes the traffic to the next closest data centres via privately owned links.
 
 
   
+## Scaling the Stateful System - Cache and DB Tier
 
+### CRUD System
+
+System which supports Create, Read, Update and Delete Operation.
+
+In stateful systems, data replication[Cache and DB Tier] is much more difficult than the compute replication [App Tier] due to the CRUD operations.
+
+We will go over scaling the Stateful System in two phases:
+
+1. Stage-1 - Assuming data is small and fits into one server , will focus on availability, throughput, response time.
+2. Stage-2 - Data is huge and needs multiple servers to store 
+
+### Stage -1 -  Availability , Throughput , Response time.
+
+Things to Note:
+
+1. Data fits into one server.
+2. Read Heavy System
+3. Build system focussing on availability , throughput , response time.
+
+Setup
+
+We have an App , Cache[in memory hash table] and DB Tier in a  Microservice where Cache holds the key and the value [offset on disk].
+
+**Delete Operation**
+
+Delete the key from the in memeory hash table , this will make the disk data inaccessible i.e defunct data.
+
+**Update Operation**
+
+1. Data in the disk is sequentially laid out back to back making no room for newer addition in between unless shifting all the values that would be costly.
+2. We cannot directly update the value as the amount of updated text corresponding to the value might increase making the number of bytes for storing the text more than it was earlier. 
+3. We will do Delete and then fresh insert operation to accomplish Update Operation.
+	1. On disk - We will append a new key-value pair at the end of the file.
+	2. On im memory hash table - Update the offset value to the most updated version of key value pair in the disk.
+	3. Run the compaction process ,to clean up the older key-value pair.
+
+**Compaction Process**
+Read the disk file from the most recetly added end going backwards in time, and for every new key the compaction process sees ,it knows it is the latest value in file and copy the key value pair to a new location on disk where a new file is sequentially built up. New file is built up without any older data i.e defunct data Once this process is completed, the DB table switches to this new file.
+
+#### Single Leader Data Replication
+
+1. All writes goes into the leader / master / primary.
+2. Leader records the change in the data and send the logs of changes i.e replication log to all the replicas.
+3. Each follower, applies to same changes to its data as shared in the replication logs.
+2. All Reads can be sent to any of the replicas.
+
+Issues
+
+1. Inconsistency - Reads may sometimes see stale data until replication has completed.
+
+Evnetually , the follower catches up with the leader i.e **Eventual Consistency** with some replication lag.
+
+
+**Strong Consistency **
+When client can't tell that the system is replicated.
+
+One way to achieve strong consistency in the Single Leader Data Replication is by putting a lock on read operation untill all the write operation is replicated across leader and followers.However it would impact the throughput of the system.
+
+				**Tradeoff between Strong Consistency and Higher troughput.**
+
+#### MultiLeader 
+
+
+
+
+
+
+ 
 
 
