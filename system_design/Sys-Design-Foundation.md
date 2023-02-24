@@ -183,6 +183,8 @@ In case of outage in one of the data centres,routers re-routes the traffic to th
 
 ### CRUD System
 
+![](images/crud.jpeg)
+
 System which supports Create, Read, Update and Delete Operation.
 
 In stateful systems, data replication[Cache and DB Tier] is much more difficult than the compute replication [App Tier] due to the CRUD operations.
@@ -222,6 +224,8 @@ Read the disk file from the most recetly added end going backwards in time, and 
 
 #### Single Leader Data Replication
 
+![](images/single-leader.jpeg)
+
 1. All writes goes into the leader / master / primary.
 2. Leader records the change in the data and send the logs of changes i.e replication log to all the replicas.
 3. Each follower, applies to same changes to its data as shared in the replication logs.
@@ -231,17 +235,30 @@ Issues
 
 1. Inconsistency - Reads may sometimes see stale data until replication has completed.
 
-Evnetually , the follower catches up with the leader i.e **Eventual Consistency** with some replication lag.
+Eventually , the follower catches up with the leader i.e **Eventual Consistency** with some replication lag.
 
 
-**Strong Consistency **
+**Strong Consistency**
+
 When client can't tell that the system is replicated.
 
 One way to achieve strong consistency in the Single Leader Data Replication is by putting a lock on read operation untill all the write operation is replicated across leader and followers.However it would impact the throughput of the system.
 
-				**Tradeoff between Strong Consistency and Higher troughput.**
+There is a tradeoff between Strong Consistency and Higher troughput in the Single Leader Data Replication setting.
 
-#### MultiLeader 
+#### MultiLeader Data Replication
+
+
+
+#### Leaderless Replication with Quorum Reads and Writes 
+
+
+#### CAP Theorem 
+
+
+#### Content Distribution Network
+
+#### 
 
 
 
