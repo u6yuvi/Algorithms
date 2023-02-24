@@ -1,9 +1,26 @@
 # System Design Learning Path
 
 ## System Design Fundamentals
-1. IP
-2. Port
-3. DNS
+
+![Sys-Design Fundamentals](https://github.com/u6yuvi/Algorithms/blob/main/system_design/Sys-Design-Foundation.md)
+
+Topics Included
+
+1. Network Protocols
+2. Web Server
+3. Performance Metrics for Scaling
+4. Forward and Reverse Proxy
+5. Scaling the Stateless System
+    1. Load Balancer
+    2. DNS based Routing 
+    3. IP -Anycasting
+6. Scaling the Stateful System
+    1. CRUD System
+    2. Single Leader Replication
+    3. Multi Leader Replication
+    4. Leaderless Replication 
+7. CAP Theorem 
+8. Content Distribution Network
 
 ## Different System Types:
 1. Online Processing Systems
