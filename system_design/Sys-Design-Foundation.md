@@ -262,9 +262,52 @@ Use most latest timestamp of the request to resolve the conflict.
 
 #### Leaderless Replication with Quorum Reads and Writes 
 
+Instead of leader being the source of truth , a simple majority of replicas can be the source of truth.
+
+Steps:
+1. When writing , send the request to all the replicas.
+2. Once majority of them ack the write ,consider it successful.
+3. When reading , ask for everyone's opinion and take the majority views.(assuming every replica responds)	.
+4. In case of tie , timestamp can help us discern the truth.
+
+![](images/leaderless1.jpeg)
+
+N - Total number of replicas.
+Write Quorum [W]- No of replicas that needs to ack the write request.
+
+Read Quorum [R]- No of replicas that needs to ack the read request.
+
+Neccessary Condition  - W + R > N 
+
+Choosing value of R and W can be prioritised based on the requirements whether read needs to be faster or writ needs to be faster, but ensure R and W is not equal to N as then in case of failure of any replica, read or write operation will fail.
+
+Eventual Consistency is achieved using this approach.
+
+![](images/leaderless2.jpeg)
 
 
 #### CAP Theorem 
+C- Consistent
+A- Available
+P - Partition
+
+![](images/cap1.jpeg)
+Applicable for a specific kind of failure which is the network partition across two different data centres.
+
+For a single leader replication scenario , when network partition happens, the write request on the data centre where there is no leader will be rejected as the request cannot reach the leader. 
+
+Hence , it impacts the availability of the system, but the system is consistent. Such systems are called Consistent when Partitioned systems. [CP]
+
+For a multi leader replication scenario, when network partition happens, the write request will be successful , but the write logs will not be replicated across different data centre due to network partition,
+
+Hence , it impacts the consistency of the system, but the system is available. Such systems are called Available when Partitioned systems. [AP]
+
+**CAP Theorem**<br>
+When network partitioned ,a distributed system can be either AP or CP but not both CA.
+
+A system which is CA is not a distributed system.
+
+![](images/cap2.jpeg)
 
 
 #### Content Distribution Network
