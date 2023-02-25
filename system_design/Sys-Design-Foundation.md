@@ -231,11 +231,10 @@ Read the disk file from the most recetly added end going backwards in time, and 
 3. Each follower, applies to same changes to its data as shared in the replication logs.
 2. All Reads can be sent to any of the replicas.
 
-Issues
+Limitations
 
-1. Inconsistency - Reads may sometimes see stale data until replication has completed.
-
-Eventually , the follower catches up with the leader i.e **Eventual Consistency** with some replication lag.
+1. Inconsistency - Reads may sometimes see stale data until replication has completed.Eventually , the follower catches up with the leader i.e **Eventual Consistency** with some replication lag.
+2. In scenario where leader is in one data centre and the follower in the other data centre, any write request on the other data centre where no leader is available ,response time for write operation would be higher.
 
 
 **Strong Consistency**
@@ -247,10 +246,22 @@ One way to achieve strong consistency in the Single Leader Data Replication is b
 There is a tradeoff between Strong Consistency and Higher troughput in the Single Leader Data Replication setting.
 
 #### MultiLeader Data Replication
+![](images/multi-leader1.jpeg)
 
+Single Leader Replication could handle the throughput and availability issues but didnot do well in response time.
+
+In Multi Leader setting ,put one leader in each data centre,so that the response time for write operation goes down. However time taken for Eventual Consistency would remain the same as the change logs has to be sent to the other data centre.
+
+Issues
+
+1. How to handle two simultaneous write operation on the same key in two different data centres.
+
+Use most latest timestamp of the request to resolve the conflict.
+![](images/multi-leader-2.jpeg)
 
 
 #### Leaderless Replication with Quorum Reads and Writes 
+
 
 
 #### CAP Theorem 
