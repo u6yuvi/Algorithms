@@ -312,7 +312,17 @@ A system which is CA is not a distributed system.
 
 #### Content Distribution Network
 
-#### 
+Instead of setting up a microservice containing App, Cache and DB tier , just create a microservice with App and Cache tier which are called Proxy server caches for faster retrieval of popular data.
+![](images/cdn1.jpeg)
+
+CDN - Geographically distributed collection of proxy servers caches which stores not all but most of the popular content close to the end users for faster response time.
+They are good for static data storage.
+
+![](images/cdn2.jpeg)
+
+
+
+
 
 
 
