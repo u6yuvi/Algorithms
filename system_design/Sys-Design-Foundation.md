@@ -181,7 +181,9 @@ In case of outage in one of the data centres,routers re-routes the traffic to th
   
 ## Scaling the Stateful System - Cache and DB Tier
 
-### CRUD System
+### DB Tier
+
+#### CRUD System
 
 ![](images/crud.jpeg)
 
@@ -194,7 +196,7 @@ We will go over scaling the Stateful System in two phases:
 1. Stage-1 - Assuming data is small and fits into one server , will focus on availability, throughput, response time.
 2. Stage-2 - Data is huge and needs multiple servers to store 
 
-### Stage -1 -  Availability , Throughput , Response time.
+#### Stage -1 -  Availability , Throughput , Response time. - Read Heavy System
 
 Things to Note:
 
@@ -319,6 +321,104 @@ CDN - Geographically distributed collection of proxy servers caches which stores
 They are good for static data storage.
 
 ![](images/cdn2.jpeg)
+
+
+### Cache Tier
+
+Primary Purpose of the Cache Tier is to increase throughput of the system.
+
+
+#### Cache CRUD Operation
+
+Read Operation with and without Cache Miss
+
+1. GET operation on Cache
+2. If found return from Cache
+3. Else , if not found, GET operation on DB [Cache Miss]
+![](images/cache-1.jpeg)
+
+Write Operations
+
+1. Insert New key-value
+	1. Insert in DB
+	2. Put in Cache
+2. Update key-value 
+	1. Delete from Cache
+	2. Insert in DB
+	3. Put in Cache
+![](images/cache-2.jpeg)
+
+3. Delete  key-value
+	1. Delete from DB
+	2. Delete from Cache
+![](images/cache-3.jpeg)
+
+### Cache Tier Strategies
+
+1. Cache Aside Approach
+	1. App tier interacts with both Cache Tier and DB Tier.
+	2. DB Tier and Cache Tier donot interact with each other.
+
+Replication in Cache Aside Scenario could be done through Leader Based Replication or Leaderless Replication using Quoram Read and Writes.
+
+Consistency in Cache Replicas is not of a very big concern as our souce of truth is the DB Tier. So untill all the replicas has the popular key-value pair ,which accounts for 98 to 99% of read served , we are good.
+
+![](images/cache-tier1.jpeg)
+
+2. Read Through Strategy
+	1. App Tier only interacts with Cache Tier.
+	2. Cache Tier interacts with DB Tier.
+
+Read Operation in Read Through Strategy
+
+1. Read request from App Tier to Cache Tier.
+2. If found, return from Cache.
+3. Else, Cache sends GET request to DB.
+4. DB returns to Cache.
+5. Cache returns to App.
+
+Write Operation in Read Through Strategy
+
+1. Write request from App Tier to Cache Tier.
+2. Cache inserts the key-value pair
+3. Write Request from Cache to DB.
+4. DB writes and returns Success.
+5. Cache sends the success back to get the next write request.
+
+![](images/cache-tier2.jpeg)
+
+Advantage of Read Through Strategy
+
+1. No need to write and manage the code and the orchestration from the app server.
+
+Limitation of Read Through Strategy
+Read Through Strategy when compared to Cache Aside Approach takes longer for the write operation,however as the number of writes are few, both approaches are practical.
+
+We can optimise the Write Operation in the Read Through Strategy using the <br>
+**Write Back or Write Behind Strategy** which works as follows:
+
+1. Make cache return success when write happens in the cache without writing it to the DB.
+2. In such cases, the cache can sent the write request to DB in two ways:
+	1. As a batch job, when good amount of data is there to be pushed to DB.
+	2. Write when the cache is full following the LRU policy also called lazy writing.
+
+
+![](images/cache-tier3.jpeg)
+Limitation of Write Back or Write Behind Strategy
+
+1. If the machine crashes, the cache data which is not yet written in the DB layer is lost.
+
+
+#### Stage -2 -  Scaling for Data - Write Heavy System
+
+#### Sharding
+
+#### Resharding 
+
+
+
+
+
 
 
 
