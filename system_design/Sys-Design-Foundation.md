@@ -411,9 +411,77 @@ Limitation of Write Back or Write Behind Strategy
 
 #### Stage -2 -  Scaling for Data - Write Heavy System
 
+Up untill now , we have looked into understanding the Load Balancer, Replication and Caching Strategies considering a Read heavy(R>>>W) system assuming a single database server can hold all the data.
+
+But now, we will make the situation more complex by  adding the fact that:
+
+1. Our data doesnot fit into one server.We need multiple servers to distribute and store data.
+2. Write queries per second is so high, that a single machine couldn't handle.
+
 #### Sharding
 
+![](images/sharding.jpeg)
+Instead of all data (k-v pair) residing in one data server ,it is partitioned across different data servers, where each k-v pair belong to one partition/shard.
+
+Assumption we are taking here is each partition/shard make up a separate DB/cache.
+
+To improve availability, we apply the replication factor to be 3, and we can use any of the above Replication strategies.
+
+**Hotspot**
+
+When a partition is so skewed that it gets disproportionate amount of query, we call it a hotspot.
+
+Our goal of partitioning should we such that:
+
+1. Spread the data evenly across shards.
+2. Query load to be distributed equally across shards.
+
+Doing so, we ensure none of the partition/shard becomes a candidate of a hotspot.
+
+Let's look at the Routing strategy which works for the sharded DB Tier avoiding hotspot:
+
+1. Load Balancers/Routers that routes the request are called Partiton Aware Load Balancer/Router.
+
+2. We rely on the hashing techinque(unpredictable yet deterministic) to identify the shard to route the traffic.
+
+3. For availability , we can think of each shard having a 3x replication.
+
+
 #### Resharding 
+
+![](images/resharding.jpeg)
+Reasons for Resharding
+
+1. Data size/write queries is unexpectedly increasing with time.
+2. start small,want to scale in future when data grows beyond one server capacity.
+
+One approach to do that would be add one more server.But that would change the shard id numbers and hence all the data and queries needs to be moved from one shard server to another i.e Rebalancing/Resharding which is very expensive ~O(n) if k is the number of key-value pairs that needs to be moved from  one shard server to another and we will have many such shard servers.
+
+#### Consistent Hashing
+
+Instead of partitioning the data based on number of servers, we partition both data and servers using a virtual partition/shard id is called Consistent Hashing. 
+
+Consider k number of key-value pairs(i1,i2,i3...ik) and n number of shard servers(j1,j2..jn-1) and b is the number of virtual partitions/shards we desire.
+
+Note - Here Shard Servers is different from the partitions/shards , as one shard server can contain multiple partitions/shards.
+
+1. Identify which key value pair goes in which partition/shard, by finding key-value hash using b.
+So,the key-value hash ids for kth key-value pair = MD5(ik) %b.
+2. Identify the shard server in which a particular partition/shard lies by finding which server_id hash using b.So,the server_id hash for n-1th server = MD5(j(n-1))%b.
+
+![](images/consistent-hashing-1.jpeg)
+
+**Addition and Failure of Servers**
+ ![](images/consistent-hashing-2.jpeg)
+ 
+ 
+**Consistent Hashing with Replication**
+![](images/consistent-hashing-3.jpeg)
+
+
+
+
+
 
 
 
