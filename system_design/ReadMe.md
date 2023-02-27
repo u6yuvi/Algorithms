@@ -21,6 +21,9 @@ Topics Included
     4. Leaderless Replication 
 7. CAP Theorem 
 8. Content Distribution Network
+9. Sharding
+10. Resharding
+11. Consistent Hashing
 
 ## Different System Types:
 1. Online Processing Systems
