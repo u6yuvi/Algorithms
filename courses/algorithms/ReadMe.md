@@ -9,4 +9,4 @@
 # Solved Leet Code Problems
 
 ## Sorting 
-1. ![912 - Sort an Array](https://leetcode.com/problems/sort-an-array/)
+2. [912 - Sort an Array](https://leetcode.com/problems/sort-an-array/)
