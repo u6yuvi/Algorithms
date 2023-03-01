@@ -3,3 +3,10 @@
 1. Word Break 
     1. Recursion
     2. Dynamic Programming
+
+
+
+# Solved Leet Code Problems
+
+## Sorting 
+1. ![912 - Sort an Array](https://leetcode.com/problems/sort-an-array/)
