@@ -28,7 +28,8 @@
 
 #Miscellanious Questions
 1. [443. String Compression](https://leetcode.com/problems/string-compression/)
+Time Complexity - O(n)
 2. [28. Find the Index of the First Occurrence in a String](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/)
-
+Time Complexity - O(n)
 
 
