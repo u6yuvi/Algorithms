@@ -19,6 +19,16 @@
         1. Soln - Sort the Array and Two Pointer Approach
          Aux Space - O(logn)-Sorting_Stack  T(n) = O(n)
         2.  Using Hashmap - Aux Space - O(n) ,T(n)  - O(n)
+5. [15. 3Sum](https://leetcode.com/problems/3sum/)
+6. 3 Sum Smaller - Locked on Leet Code. Code available in practice file.
 5. Sort Colors
+
+
+
+
+#Miscellanious Questions
+1. [443. String Compression](https://leetcode.com/problems/string-compression/)
+2. [28. Find the Index of the First Occurrence in a String](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/)
+
 
 

@@ -112,9 +112,153 @@ def find_3_sum(arr):
 # print(find_3_sum(arr))
 
 
+#Variation of 3 sum
+'''
+3 Sum
+Given an integer array arr of size n, find all magic triplets in it.
 
+Magic triplet is a group of three numbers whose sum is zero.
+
+Note that magic triplets may or may not be made of consecutive numbers in arr.
+'''
+
+
+def find_zero_sum(arr):
+    """
+    Args:
+     arr(list_int32)
+    Returns:
+     list_str
+    """
+    # Write your code here.
+    
+    '''
+    Time Complexity - O(n2) + O(nlogn)
+    Space Complexity - O(n)-for output
+    
+    Things to note:
+    1. Quick Sort
+    2. Initialising j and k after starting i.
+    3. Pointers Range for j and k in the while loop for removing duplicates
+    3. Use of Set operator for storing the results.
+    '''
+    
+    def quicksort(a,start,end):
+        
+        #base case 
+        if start>= end :
+            return
+        
+        #recursive case
+        #get the pivot
+        pivot = random.randint(start,end)
+        
+        # swap
+        a[start], a[pivot] = a[pivot], a[start]
+        
+        #lomuto's partitioning
+        
+        smaller = start
+        for bigger in range(start+1,end+1):
+            if a[bigger] <= a[start]:
+                smaller+=1
+                a[smaller], a[bigger] = a[bigger], a[smaller]
+        
+        a[start], a[smaller] = a[smaller], a[start]
+        
+        
+        quicksort(a,start, smaller-1) #exclude the pivot element
+        quicksort(a,smaller+1,end)
+        return a
+        
+    
+    result = quicksort(arr,0,len(arr)-1)
+    
+    f_res = set()
+    
+    for i in range(0,len(result)):
+        j = i+1
+        k = len(arr)-1
+        while j<k and k>i:
+            if result[j] + result[k] + result[i] == 0:
+                
+                f_res.add(str(result[i])+","+str(result[j])+","+str(result[k]))
+                j+=1
+                k-=1
+            elif result[j] + result[k] + result[i] >0:
+                k-=1
+            elif result[j] + result[k] + result[i] <0:
+                j+=1
+                
+    
+    return list(f_res)
+
+arr = [4, -2, -2, -1, -3]
+print(find_zero_sum(arr))
 # Merge Sorted array
 
+#-----------------------Problem- 3 Sum Smaller------------------------------------
+'''
+3 Sum Smaller
+Given a list of numbers, count the number of triplets having a sum less than a given target.
+
+'''
+def count_triplets(target, numbers):
+    """
+    Args:
+     target(int32)
+     numbers(list_int32)
+    Returns:
+     int32
+    """
+    # Write your code here.
+    def quicksort(a,start,end):
+        
+        #base case 
+        if start>= end :
+            return
+        
+        #recursive case
+        #get the pivot
+        pivot = random.randint(start,end)
+        
+        # swap
+        a[start], a[pivot] = a[pivot], a[start]
+        
+        #lomuto's partitioning
+        
+        smaller = start
+        for bigger in range(start+1,end+1):
+            if a[bigger] <= a[start]:
+                smaller+=1
+                a[smaller], a[bigger] = a[bigger], a[smaller]
+        
+        a[start], a[smaller] = a[smaller], a[start]
+        
+        
+        quicksort(a,start, smaller-1) #exclude the pivot element
+        quicksort(a,smaller+1,end)
+        return a
+        
+    
+    result = quicksort(numbers,0,len(numbers)-1)
+    
+    f_res = set()
+    cnt = 0
+    for i in range(0,len(result)):
+        j = i+1
+        k = len(result)-1
+        while j<k and k>j:
+            if result[j] + result[k] + result[i] >=target:
+                k-=1
+            elif result[j] + result[k] + result[i] <target:
+                
+                cnt+= k-j
+                j+=1
+
+    
+    return cnt
+  
 
 def merge_one_into_another(first, second):
     """
@@ -338,7 +482,7 @@ def kth_smallest_in_an_array(numbers, k):
     quick_select(numbers,0,len(numbers)-1,k)
     return numbers[k-1]
 
-print(kth_smallest_in_an_array([5, 1, 10, 3, 21],2))
+# print(kth_smallest_in_an_array([5, 1, 10, 3, 21],2))
 
 
 #----------------kth closest point to the origin----------------
@@ -387,7 +531,7 @@ def k_closest_points_to_the_origin(numbers, k):
     quick_select(numbers,0,len(numbers)-1,k)
     return numbers[:k-1+1] # all elements upto kth element
 
-print(k_closest_points_to_the_origin([[3,3],[5,-1],[-2,4]],2))
+# print(k_closest_points_to_the_origin([[3,3],[5,-1],[-2,4]],2))
 
 
 #-----------------Dutch Flag Sort-------------------------
@@ -526,7 +670,7 @@ a = {
 "arr3": [2, 4, 10]
 }
 
-print("Union",find_union(a["arr1"],a["arr2"],a["arr3"])) #output [2,10]
+# print("Union",find_union(a["arr1"],a["arr2"],a["arr3"])) #output [2,10]
 
 
 #------------k most frequent words-------------------
@@ -548,7 +692,7 @@ def find_top_k_frequent_elements(arr, k):
             hash_map[arr[i]] =1
     
     def quickselect(arr1,start,end,k,hash_map):
-        if start==end:
+        if start==end:   # in quick select  smallest subproblem will always be of size 1
             return
     
 
@@ -556,8 +700,8 @@ def find_top_k_frequent_elements(arr, k):
         arr1[start], arr1[pivot] = arr1[pivot], arr1[start]
         
         smaller = start
-        for bigger in range(start,end+1):
-            if hash_map[arr1[bigger]]<hash_map[arr1[start]]:
+        for bigger in range(start+1,end+1):
+            if hash_map[arr1[bigger]]<=hash_map[arr1[start]]:
                 smaller+=1
                 arr1[smaller], arr1[bigger] = arr1[bigger], arr1[smaller]
         arr1[smaller], arr1[start] = arr1[start], arr1[smaller]
@@ -577,7 +721,7 @@ def find_top_k_frequent_elements(arr, k):
     print(arr1)  
     return arr1[len(arr1)-k:]
 
-# print(find_top_k_frequent_elements( [1, 2, 3, 2, 4, 3, 1],2))
+print("topk",find_top_k_frequent_elements(  [1, 2, 3, 2, 4, 3, 1],2))
 
 
 def fruits(fruits):
@@ -627,7 +771,4 @@ def fruits(fruits):
             end+=1
 
 
-print(fruits([3,3,3,1,2,1,1,2,3,3,4]))
-
-
-
+# print(fruits([3,3,3,1,2,1,1,2,3,3,4]))
