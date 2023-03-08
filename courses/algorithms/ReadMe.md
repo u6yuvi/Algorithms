@@ -21,7 +21,12 @@
         2.  Using Hashmap - Aux Space - O(n) ,T(n)  - O(n)
 5. [15. 3Sum](https://leetcode.com/problems/3sum/)
 6. 3 Sum Smaller - Locked on Leet Code. Code available in practice file.
-5. Sort Colors
+5. [75. Sort Colors](https://leetcode.com/problems/sort-colors/)
+## Quick Select 
+6. [347. Top K Frequent Elements](https://leetcode.com/problems/top-k-frequent-elements/)
+7. [215. Kth Largest Element in an Array](https://leetcode.com/problems/kth-largest-element-in-an-array/)
+8. [973. K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)
+
 
 
 
@@ -31,5 +36,11 @@
 Time Complexity - O(n)
 2. [28. Find the Index of the First Occurrence in a String](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/)
 Time Complexity - O(n)
+
+
+## Recursion 
+1. [784. Letter Case Permutation](https://leetcode.com/problems/letter-case-permutation/)
+2. [46. Permutations](https://leetcode.com/problems/permutations/)
+3. [47. Permutations II](https://leetcode.com/problems/permutations-ii/)
 
 
