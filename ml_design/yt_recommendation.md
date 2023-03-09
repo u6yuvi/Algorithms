@@ -34,7 +34,7 @@
 ## Problem Statement
  Build a video recommendation system for Youtube users. We want to maximize users engagement and recommend new types of content to users.
 
-### Gathering Requirements
+### 1. Gathering Requirements
 1. Size and Scale of the high level system
 
 	1. Total number of users - 1.3 billion
@@ -90,7 +90,7 @@
 	3. Inference - Latency from 100 ms to 200 ms. Flexible to control exploration versus exploitation
 
 
-### Define Metrics
+### 2. Define Metrics
 
 Online Metric
 1. Click through rate
@@ -105,10 +105,111 @@ Offline Metrics
 3. F1 Score
 4. PR curve (class imbalance)
 
-### High Level Architecture
+### 3. High Level Architecture
 
 ML component
 
 Non ML component
+
+
+## 4. Building System Componenets
+
+1. Data
+	1. Training Data Generation
+	2. Hand Labelled Data
+	3. Implicit data from logs
+	4. Advanced labeling
+		1. Semi Supervised Approach
+	5. Feature Engineering
+		1. One hot encoding,Feature Hashing,NN Embedding
+		2. Standardisation /Normalization
+		3. Missing Value Treatment	
+2. Data Ops
+	1. Data Storage
+		1. Object Storage
+		2. Database for metadata
+		3. FeatureStore
+		4. Data versioning
+	2. Data Injestion and transform
+		1. Offline Data Can query database
+		2. Online Data- High throuhput low latency,online or streaming service using Apache Kafka,RabbitMQ
+		3. Feature Transformation - Apache Spark,Tensorflow Transform
+		4. Orchestration
+			1. Airflow
+			2. Kubernetes
+3. Computing Resource - Edge ,Cloud
+4. Learning Modes - Offline learning and online learning
+5. Inference Modes - Batch and online
+6. ML Model and Architecture
+	1. Candidate Generation
+	2. Ranking
+7. ML Ops
+	1. Repeatability of Experiments: ML Flow, Kubeflow
+	2. Parallelize HP tuning on cloud.
+	3. Model versioning 
+7. Serving	
+	1. Online A/B Testing
+	2. Where to run inference
+		1. User's phone or computer - low latency but high memory and battery usage.
+		2. On company service - increased latency and privacy concerns but no device-level challenges.
+
+	3. Monitoring Performance
+		1. Log Error Rates
+		2. Time to return queries
+		3. Metric Score
+
+	4. Biases and Misuse of the model
+	5. How often to retrain the model
+	6. Store logs in a database like Elastic Search,Logstash
+	7. 	Logging Analytics tool: Kibana ,Splunk
+	8. CI/CD: Circle CI, Travis CI
+	9. Deploying on Embedded and Mobile Device
+		1. Quantisation
+		2. Reduced model size
+		3. Knowledge Distillation
+
+		
+#### ML Algorithm
+
+1. Candidate Generation
+
+	1. Content Based Filtering
+		1. Item-Item Similarity
+		2. Advantages-
+			1. No info required for other user.Easier to scale to a large number of users.
+			2. Can capture specific interest of user and recommend niche items that very few other users are interested in.
+		3. Disadvantage
+			1. Feature Representation of items are hand engineered ,hence requires domain knowledge.
+			2. Limited ability to expand 	on user's exisiting interests.
+	2. Collaborative Filtering[CF]
+		1. Advantages
+			1. No domain knowledge necessary- as embeddings are already learned.
+			2. Model can help users discover new interests.
+			3. System only needs a feedback matrix to train a matrix factorization model and not contextual features.
+		2. Disadvantages
+			1. Cannot handle fresh items - cold start problem.
+			2. Heurisitic to generate embeddings of fresh items.
+			3. Hard to include side features for query or item.
+				1. Generalization of WALS by augmenting the input matrix with features.
+		1. User-User CF
+			1. Recommend items based on similar users.
+			2. Too many users on the platform,doesnot scale well.
+		2. Item-Item CF
+			1. Recommend items based on similar videos watched by users.
+			2. Too many new videos uploaded on platform.Doesnot scale well.
+		3. User-Item - Too much space required. O(mn)
+
+		
+
+2. Matrix Factorization used in Collaborative Filtering
+	1. Project videos and users in the same space for direct comparision.
+	2. Computationally efficient
+	3. No interpretability
+	4. Optimisation Algorithm
+		1. SGD
+		2. Weighted Alternating Least Square.
+	4. USV[T] - U- User Matrix, S- Latent Space[Diagonal Matrix] , V[T] - Item Matrix
+3. Deep Learning Based
+		
 
 		
