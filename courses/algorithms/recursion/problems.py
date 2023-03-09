@@ -1,3 +1,5 @@
+import math
+
 '''
 46. Permutations
 Permute Array Of Unique Integers
@@ -126,6 +128,7 @@ Space Complexity : Input + Aux Space + Output
 
 #--------------------------Question-3-----------------------
 '''
+78. Subsets
 Generate All Subsets Of A Set
 Generate ALL possible subsets of a given set. The set is given in the form of a string s containing distinct lowercase characters 'a' - 'z'.
 
@@ -264,6 +267,7 @@ Worst Case is when all numbers are unique.....
 #-------------------------Question-5-----------------------------------
 
 '''
+90. Subsets II
 Subsets With Duplicate Characters
 Given a string that might contain duplicate characters, find all the possible distinct subsets of that string.
 
@@ -313,8 +317,8 @@ def get_distinct_subsets(s):
     return result
 
 '''
-Time Complexity - Leaf Node + Intermediate Node
-                O(2^n*n)     +  O(2^n*1)
+Time Complexity - Leaf Node + Intermediate Node + Other
+                O(2^n*n)     +  O(2^n*n) [ Due to cnt]  + Sorting [nlog(n)]
 Space Complexity - Input  + Aux + Output
                    O(n)   + O(n)  + O(2^n *n)
 '''
@@ -398,6 +402,7 @@ def get_words_from_phone_number(phone_number):
 #-----------------------Question-7--------------------
 
 '''
+77. Combinations
 N Choose K Combinations
 Given two integers n and k, find all the possible unique combinations of k numbers in range 1 to n.
 
@@ -904,3 +909,111 @@ def distinctNames(ideas) -> int:
         
 
 print(distinctNames(["coffee","donuts","time","toffee"]))
+
+
+
+#---------------Problem---------------------
+'''
+39. Combination Sum
+'''
+
+def combinationSum(candidates: int, target: int):
+    
+        '''Assumption 
+        All the numbers in the array are positive
+        if they are negative , backtracking case - sum(slate[:])>target is not the correct condition as there could be negative numbers afterwards.
+        Soln- Sort the numbers and then do the same
+        '''
+        #Naive Way
+        #         slate = []
+        #         result = []
+                
+        #         def helper(arr,i,slate):
+        #             #print(slate,target,result)
+                    
+        #             #backtrack case
+        #             if sum(slate[:])==target:
+        #                 result.append(slate[:])
+        #                 return
+                    
+        #             #backtrack 
+        #             if sum(slate[:]) >target:
+        #                 return
+        #             #base
+        #             if i ==len(arr):
+        #                 return 
+                
+                        
+        #             #recursive cas
+                    
+        #             #include
+        #             cnt = 1
+        #             cnt = math.floor(target/arr[i])
+        #             cnt = max(cnt,1)
+        #             for pick in range(1,cnt+1):
+        #                 slate.append(arr[i])
+        #                 helper(arr,i+1,slate)
+                    
+        #             for pick in range(1,cnt+1):
+        #                 slate.pop()
+        #             #exclude 
+        #             helper(arr,i+1,slate)
+                    
+        #         helper(candidates,0,slate)
+        #         return result
+            
+        #Optimised Version
+        '''
+        Keep the running sum so that leaf worker need not recalculate it
+        '''
+
+
+        slate = []
+        result = []
+        
+        def helper(arr,i,slate,running_sum):
+            #print(slate,target,result)
+            
+            #backtrack case
+            if running_sum==target:
+                result.append(slate[:])
+                return
+            
+            #backtrack 
+            if running_sum >target:
+                return
+            #base
+            if i ==len(arr):
+                return 
+        
+                
+            #recursive cas
+            
+            #include
+            cnt = 1
+            cnt = math.floor(target/arr[i])
+            cnt = max(cnt,1)
+            for pick in range(1,cnt+1):
+                slate.append(arr[i])
+                helper(arr,i+1,slate,running_sum+arr[i]*pick)
+            
+            for pick in range(1,cnt+1):
+                slate.pop()
+            #exclude 
+            helper(arr,i+1,slate,running_sum)
+            
+        helper(candidates,0,slate,0)
+        return result
+
+
+        '''
+        Time Complexity - Intermediate Node + Leaf Node
+            Number of workers[(2^t1)*2(t2)..2^(tn)] * Work done per worker(O(1)) + \
+            
+            Leaf Node -[(2^t1)*2(t2)..2^(tn)]* Size of the array O(n)
+            
+        Space Complexity - Input [O(n)] + Aux[O(n)] + Leaf [[(2^t1)*2(t2)..2^(tn)]*n]
+
+        https://leetcode.com/problems/combination-sum/discuss/1755084/Detailed-Time-and-Space-Complexity-analysisc%2B%2Bjavabacktracking
+        '''
+print(combinationSum([2,3,6,7],7))
