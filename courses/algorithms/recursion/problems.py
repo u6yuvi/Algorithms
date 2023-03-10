@@ -1017,3 +1017,54 @@ def combinationSum(candidates: int, target: int):
         https://leetcode.com/problems/combination-sum/discuss/1755084/Detailed-Time-and-Space-Complexity-analysisc%2B%2Bjavabacktracking
         '''
 print(combinationSum([2,3,6,7],7))
+
+
+#----------------------------Problem----------------------------------------
+'''
+40. Combination Sum II
+Given a collection of candidate numbers (candidates) and a target number (target), find all unique combinations in candidates where the candidate numbers sum to target.
+
+Each number in candidates may only be used once in the combination.
+
+Note: The solution set must not contain duplicate combinations.
+'''
+def combinationSum2(candidates, target):
+        
+        
+    result = []
+    slate = []
+    arr = sorted(candidates)
+    
+    def helper(arr,i,slate,running_sum):
+        
+        #backtrack
+        if running_sum == target:
+            result.append(slate[:])
+            return
+        if running_sum >target:
+            return
+        
+        if i >=len(arr):
+            return
+        
+        #recursive case
+        
+
+        
+        #include
+        
+        cnt = len([j for j in arr[i:] if j ==arr[i] ])
+        for pick in range(1,cnt+1):
+            slate.append(arr[i])
+            helper(arr,i+cnt,slate,running_sum+arr[i]*pick)
+            
+        for pick in range(1,cnt+1):
+            slate.pop()
+        #exclude
+        helper(arr,i+cnt,slate,running_sum)
+            
+    
+    helper(arr,0,slate,0)
+    return result
+
+print(combinationSum2([10,1,2,7,6,1,5],8))       
