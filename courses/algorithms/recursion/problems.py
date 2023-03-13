@@ -687,6 +687,7 @@ def find_all_arrangements(n):
 
 #------------------------------Question-11-------------------
 '''
+131. Palindrome Partitioning
 Palindromic Decomposition Of A String
 Find all palindromic decompositions of a given string s.
 
@@ -1067,4 +1068,47 @@ def combinationSum2(candidates, target):
     helper(arr,0,slate,0)
     return result
 
-print(combinationSum2([10,1,2,7,6,1,5],8))       
+print(combinationSum2([10,1,2,7,6,1,5],8))    
+
+
+
+
+        
+def test(s):
+        
+        result = []
+        slate = []
+        
+        def helper(arr,i,slate):
+            
+            #check if newly added substring in slate is a pallindrome
+            
+            def checkpallin(s):
+                mid = len(s)//2
+                for k in range(0,mid+1):
+                    if s[k]!= s[len(s)-k-1]:
+                        return False
+                return True
+            #backtrack
+            if len(slate)>0 and not checkpallin(slate[-1]):
+                return
+                
+            
+            #base case
+            if i==len(arr):
+                result.append(slate[:])
+                return
+            
+            #recursive case
+            
+            for pick in range(i,len(arr)):
+                slate.append(arr[i:pick+1])
+                helper(arr,pick+1,slate)
+                slate.pop()
+        
+        
+        helper(s,0,slate)
+        return result
+
+print(test("aab"))
+                    
