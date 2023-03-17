@@ -46,11 +46,12 @@ Design a System that can recognize different regions in the Document. Different 
 
 1. Size and Scale of the high level system
 	
+	1. Upper threshold of per page extraction time ~ 200 ms considering 1 document of avg 5 pages with 20% time going into Object Detection and Extraction Module
+	2. Time to process 1 image = 100~200ms on GPU
+	3. Time to process 1 image on CPU -1-2 sec
+	4. No of categories to predict - 8[text,title]
+	5. Any futher addition of labels in future - No
 
-	1. No of images to process per second - 100
-	2. Time to process 1 image = 100/10^-3 ~ 10 ms
-	3. No of categories to predict - 8[text,title]
-	4. Any futher addition of labels in future - No
 	5. Available data
 		1. 1500 images with an average of 4 labels per image.
 		2. Around 6000/8 images / category ~ 750
