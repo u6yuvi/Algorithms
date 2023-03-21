@@ -1,4 +1,4 @@
-# System Desing - Foundation Materials
+# System Design - Foundation Materials
 
 ## Network Protocols
 
@@ -61,7 +61,7 @@ Using large number of commodity machines and getting them to work together conne
 Defining SLIs (Servive Level Indicators):
 A quantitative measure of the level of service being provided.
 
-1. **Correctness** - Is the right answer/data bbeing returned?. Error rate as a raction of all requests.
+1. **Correctness** - Is the right answer/data bbeing returned?. Error rate as a fraction of all requests.
 2. **Availability** - Could we respond to the request? Fraction of time that a service is usable. Fraction of well-formed requests that succeeds.
 	99% = 2nines , 99.999% = 5 nines , 3 1/2 nines = 99.95
 	
@@ -162,7 +162,7 @@ Different Setup Design for Load Balancer
 
 1. Load balancer with a passive backup load balancer. Two different hardware machines sharing the same IP address to handle availbility.
 2. Multiple Active Load Balancers with independent IP addresses to handle throughput.
-3. Multiple Active load Balancers with Passive Backup Load Balancers to handle both increased throughput and incresed availability.
+3. Multiple Active load Balancers with Passive Backup Load Balancers to handle both increased throughput and increased availability.
 4. Global Load Balancing -Same setup can be spanned across Data Centres where in case of failure of one Data Centre servers, traffic gets handled by other Data Centre servers.
 
 ## IP Anycasting
