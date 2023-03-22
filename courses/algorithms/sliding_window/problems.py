@@ -150,3 +150,70 @@ def maxSatisfied(customers, grumpy, minutes: int) -> int:
         
     
     return global_max + satisfied
+
+#--------------------Problem-6---------------------------------------
+'''
+1456. Maximum Number of Vowels in a Substring of Given Length
+'''
+
+def maxVowels(s: str, k: int) -> int:
+    
+    max_count = 0
+    vowel = {"a","e","i","o","u"}
+    for i in range(0,k):
+        if s[i] in vowel:
+            max_count+=1
+    
+    global_cnt = max_count
+    for i in range(k,len(s)):
+        if s[i] in vowel:
+            max_count+=1
+            
+        if s[i-k] in vowel:
+            max_count-=1
+            
+        global_cnt = max(global_cnt,max_count)
+        
+    return global_cnt
+
+
+assert maxVowels(s = "abciiidef",k=3) ==3 , "Max-vowel- should be 3"
+
+
+#--------------------Problem-7---------------------------------------
+
+'''
+1100. Find k length Substring with no repeated characters
+'''
+
+def substr_non_repeated(s,k):
+
+    global_cnt = 0
+    hmap = {}
+    for i in range(0,k):
+        if s[i] in hmap:
+            hmap[s[i]]+=1
+        else:
+            hmap[s[i]]=1
+    
+    if len(hmap)==k:
+        global_cnt+=1
+
+    for i in range(k,len(s)):
+        #add the last element
+        if s[i] in hmap:
+            hmap[s[i]]+=1
+        else:
+            hmap[s[i]]=1
+        
+        #remove the i-kth element
+        hmap[s[i-k]]-=1
+        #check if cnt of i-kth element is 0 
+        if hmap[s[i-k]]==0:
+            del hmap[s[i-k]]
+        
+        if len(hmap)==k:
+            global_cnt+=1
+    return global_cnt
+
+print(substr_non_repeated(s = "havefunonleetcode",k=5))
