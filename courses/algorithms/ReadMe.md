@@ -50,3 +50,10 @@ Time Complexity - O(n)
 9. [131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)???
 
 
+## Sliding Window
+1. [346 . moving-average-from-data-stream](https://leetcode.com/problems/moving-average-from-data-stream/)
+2. [643. Maximum Average Subarray I](https://leetcode.com/problems/maximum-average-subarray-i/)
+3. [1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold](https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/)
+4. [1176. Diet Plan Performance](https://leetcode.com/problems/diet-plan-performance/)
+5. [1052. Grumpy Bookstore Owner](https://leetcode.com/problems/grumpy-bookstore-owner/)
+
