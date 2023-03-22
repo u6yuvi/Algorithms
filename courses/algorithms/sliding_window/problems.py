@@ -217,3 +217,62 @@ def substr_non_repeated(s,k):
     return global_cnt
 
 print(substr_non_repeated(s = "havefunonleetcode",k=5))
+
+
+#-----------------Problem-8-------------------------------
+'''
+239. Sliding Window Maximum
+'''
+def maxSlidingWindow( nums, k):
+    
+    '''
+    T(n) = o(n)
+    Space = O(k)
+    '''
+    '''
+    Identify a transform method where insert , delete can happen in O(1)
+    Also at any moment we know which is the max element in O(1)
+    
+    '''
+    
+    from collections import deque
+    
+    d =deque()
+    result = []
+    
+    def pushin(val):
+        '''
+        while deque is not empty and back element < nums[i]
+        remove the back element
+        '''
+        while d and d[-1]<val:
+            d.pop()
+        d.append(val)
+    
+    #fill an empty deque
+    for i in range(0,k): 
+        pushin(nums[i])
+    
+    #max is the front element of deque
+    result = [d[0]]
+        
+    for i in range(k,len(nums)):
+        '''
+        Remove nums[i-k] and add nums[i] 
+        if nums[i-k] is the front element of the deque,
+            remove it from deque
+        else if would already have been eliminated
+        
+        while deque is not empty and back element < nums[i]
+        remove the back element
+        
+        push nums[i] to the back of the deque
+        '''
+        if d[0]==nums[i-k]:
+            d.popleft()
+        pushin(nums[i])
+        result.append(d[0])
+        
+    return result
+
+print("Max-sliding-window" , maxSlidingWindow(nums = [1,3,-1,-3,5,3,6,7] , k =3))
