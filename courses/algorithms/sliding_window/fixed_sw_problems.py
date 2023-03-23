@@ -276,3 +276,114 @@ def maxSlidingWindow( nums, k):
     return result
 
 print("Max-sliding-window" , maxSlidingWindow(nums = [1,3,-1,-3,5,3,6,7] , k =3))
+
+#---------------------------Problem-9----------------------------------------------------------
+'''
+567. Permutation in String
+'''
+
+def checkInclusion( s1: str, s2: str) -> bool:
+    '''
+    Decision Problem
+    Time Complexity - O(len(s1)) + O(len(s2))
+    Space Complexity- Each hashmap taking atmost 26 keys so O(1)
+    
+    #2nd approach - abit optimised
+    Instead of using two separate hashmaps, use one hashmap which captures the diff of s1 and s2 and store all keys where diff is >0 and <0 and delete keys where count is 0
+    Check if hmap is empty : return True 
+    '''
+    
+    if len(s1)>len(s2):
+        return False
+    
+    
+    #Step-1 initialisation for s1
+    s1_hmap = {}
+    k = len(s1)
+    for i in range(0,len(s1)):
+        if s1[i] in s1_hmap:
+            s1_hmap[s1[i]]+=1
+        else:
+            s1_hmap[s1[i]] = 1
+    
+    #Step -2 initialisation for s2 upto len(s1)
+    s2_hmap = {}
+    for i in range(0,len(s1)):
+        if s2[i] in s2_hmap:
+            s2_hmap[s2[i]]+=1
+        else:
+            s2_hmap[s2[i]]=1
+            
+    if s1_hmap == s2_hmap:
+        return True
+    
+    #Step -3 decrease and conquer
+    for i in range(k,len(s2)):
+        #insert the  ith element
+        if s2[i] in s2_hmap:
+            s2_hmap[s2[i]]+=1
+        else:
+            s2_hmap[s2[i]]=1
+        
+        #remove the i-kth element
+        if s2[i-k] in s2_hmap:
+            s2_hmap[s2[i-k]]-=1
+            
+        if s2_hmap[s2[i-k]]==0:
+            del s2_hmap[s2[i-k]]
+        
+        #check both hmap
+        if s2_hmap == s1_hmap:
+            return True
+        
+    return False
+    
+
+print(checkInclusion(s1="ab",s2="eidbaooo"))
+
+
+#---------------------------Problem-10----------------------------------------------------------
+'''
+438. Find All Anagrams in a String
+'''
+
+def findAnagrams(s2: str, s1: str):
+    
+    #initialise
+    result = []
+    s1_h = {}
+    k = len(s1)
+    for i in range(0,len(s1)):
+        if s1[i] in s1_h:
+            s1_h[s1[i]]+=1
+        else:
+            s1_h[s1[i]]=1
+            
+    s2_h = {}
+    for i in range(0,k):
+        if s2[i] in s2_h:
+            s2_h[s2[i]]+=1
+        else:
+            s2_h[s2[i]]=1
+            
+    if s1_h==s2_h:
+        result.append(0)
+        
+    #decrease and conquer
+    for i in range(k,len(s2)):
+        if s2[i] in s2_h:
+            s2_h[s2[i]]+=1
+        else:
+            s2_h[s2[i]]=1
+        
+        s2_h[s2[i-k]]-=1
+        if s2_h[s2[i-k]]==0:
+            del s2_h[s2[i-k]]
+        
+        if s1_h == s2_h:
+            result.append(i-k+1)
+            
+    return result
+        
+        
+print(findAnagrams(s2="cbaebabacd", s1 = "abc"))

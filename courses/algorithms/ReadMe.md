@@ -50,7 +50,7 @@ Time Complexity - O(n)
 9. [131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)???
 
 
-## Sliding Window
+## Fixed - Sliding Window
 1. [Prem-346 . moving-average-from-data-stream](https://leetcode.com/problems/moving-average-from-data-stream/)
 2. [643. Maximum Average Subarray I](https://leetcode.com/problems/maximum-average-subarray-i/)
 3. [1343. Number of Sub-arrays of Size K and Average Greater than or Equal to Threshold](https://leetcode.com/problems/number-of-sub-arrays-of-size-k-and-average-greater-than-or-equal-to-threshold/)
@@ -59,3 +59,16 @@ Time Complexity - O(n)
 6. [1456. Maximum Number of Vowels in a Substring of Given Length](https://leetcode.com/problems/maximum-number-of-vowels-in-a-substring-of-given-length/)
 7. [Prem - 1100. Find k length Substring with no repeated characters](https://leetcode.com/problems/find-k-length-substrings-with-no-repeated-characters/)
 8. [239. Sliding Window Maximum](https://leetcode.com/problems/sliding-window-maximum/)
+9. [567. Permutation in String](https://leetcode.com/problems/permutation-in-string/)
+10. [438. Find All Anagrams in a String](https://leetcode.com/problems/permutation-in-string/)
+
+## Variable Sliding Window
+
+1. [209. Minimum Size Subarray Sum](https://leetcode.com/problems/minimum-size-subarray-sum/)
+2. [713. Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/)
+3. [1658. Minimum Operations to Reduce X to Zero  -TODO](https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/)
+4. [1004. Max Consecutive Ones III](https://leetcode.com/problems/max-consecutive-ones-iii/)
+
+
+## Prefix Sum
+
