@@ -68,7 +68,19 @@ Time Complexity - O(n)
 2. [713. Subarray Product Less Than K](https://leetcode.com/problems/subarray-product-less-than-k/)
 3. [1658. Minimum Operations to Reduce X to Zero  -TODO](https://leetcode.com/problems/minimum-operations-to-reduce-x-to-zero/)
 4. [1004. Max Consecutive Ones III](https://leetcode.com/problems/max-consecutive-ones-iii/)
-
+5. [904. Fruit Into Baskets](https://leetcode.com/problems/fruit-into-baskets/)
+6. [Prem - longest-substring-with-at-most-two-distinct-characters](https://leetcode.com/problems/longest-substring-with-at-most-two-distinct-characters/)
+7. [Prem - longest-substring-with-at-most-k-distinct-characters](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
+8. [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
+9. [1695. Maximum Erasure Value](https://leetcode.com/problems/maximum-erasure-value/)
 
 ## Prefix Sum
 
+
+## Trees
+
+1. [102. Binary Tree Level Order Traversal](https://leetcode.com/problems/binary-tree-level-order-traversal/)
+2. [429. N-ary Tree Level Order Traversal](https://leetcode.com/problems/n-ary-tree-level-order-traversal/)
+3. [199. Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
+4. [103. Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
+5. [107. Binary Tree Level Order Traversal II](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)

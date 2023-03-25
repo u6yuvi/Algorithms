@@ -16,7 +16,7 @@ def run(data,func,**args):
     print(func(root,**args))
 #-------------------Problem-1--------------------------------------------------
 '''
-Level Order Traversal on Binary Tree
+102. Binary Tree Level Order Traversal
 
 '''
 def level_order_traversal(root):
@@ -26,7 +26,11 @@ def level_order_traversal(root):
     Returns:
      list_list_int32
     """
-    # Write your code here.
+    '''
+    Time Complexity - O(n)
+    Space Complexity - Worst Case O(n/2) ~O(n) - Number of nodes in the leaf level
+    We know around 50% of nodes are in the last level
+    '''
     result = []
     if root is None:
         return result
@@ -46,7 +50,7 @@ def level_order_traversal(root):
 
 #----------------------------------Problem-2-----------------------------------------------------
 '''
-Level Order Traversal for N-ary tree
+429. N-ary Tree Level Order Traversal
 '''
 
 """
@@ -84,7 +88,7 @@ def level_order(root):
 
 #--------------------Problem-3------------------------------------------------------------
 '''
-Right side view of the binary tree
+199. Binary Tree Right Side View
 '''
 
 def right_view(root):
@@ -108,12 +112,14 @@ def right_view(root):
                 queue.append(node.left)
             if node.right:
                 queue.append(node.right)
-        result.append(temp)
+        result.append(temp[-1])
     return result
 
 #---------------------------------Problem-3-----------------------------------------------
 
 '''
+107. Binary Tree Level Order Traversal II
+
 Reverse Level Order Traversal
 '''
 
@@ -156,7 +162,7 @@ def reverse_level_order_traversal(root):
 
 #---------------------------------Problem-4----------------------------------------------
 '''
-Zig-Zag Level Orer Traversal
+103. Binary Tree Zigzag Level Order Traversal
 '''
 
 """
@@ -198,6 +204,53 @@ def zigzag_level_order_traversal(root):
         
     return result
 
+
+'''
+2415. Reverse Odd Levels of Binary Tree
+
+'''
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+def reverseOddLevels( root):
+
+        if root is None:
+            return []
+        
+        result = []
+        q = [root]
+        while q:
+            q_len = len(q)
+            temp = []
+            i = 0
+            for _ in range(q_len):
+                node = q.pop(0)
+                temp.append(node.val)
+                if node.left:
+                    q.append(node.left)
+                if node.right:
+                    q.append(node.right)
+            if i%2==0:
+                result.extend(temp)
+            else:
+                result.extend(temp[::-1])
+            i=i+1
+
+        def insertLevelOrder(arr, i, n):
+            root = None
+            if i < n:
+                root = TreeNode(arr[i]) 
+                root.left = insertLevelOrder(arr, 2 * i + 1, n)
+                root.right = insertLevelOrder(arr, 2 * i + 2, n)
+
+            return root
+        root = None
+        n = len(result)
+        root = insertLevelOrder(result,0,n)
+        return root
 
 #-------------------------Problem-5-----------------------------------------
 
