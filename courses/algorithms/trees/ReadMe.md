@@ -1,4 +1,27 @@
+
+# Foundation
+
+1. BST as Abstract Data Type 
+2. BST to store heirarchial information
+3. Time Complexity of Balanced Binary Tree and Non-Balanced Binary Tree 
+3. Search in BST
+4. Insert in BST
+5. Delete in BST
+6. Traversal in BST [ Pre Order, In-Order, Post-Order]
+7. BST from Arrays using [Pre Order + InOrder ] or [Inorder + Post Order]
+7. Balancing Binary Trees
+
+
 # Problems
+## BST Operations
+- BST Search
+- BST Insert [ Build a Tree]
+- BST Predecessor and Successor
+- BST Delete
+    - Delete a node with no child
+    - Delete a node with single child
+    - Delete a node with two child nodes [ use successor strategy]
+
 ## DFS
 - Preorder Traversal of a Binary Tree
 - Inorder Traversal of a Binary Tree
