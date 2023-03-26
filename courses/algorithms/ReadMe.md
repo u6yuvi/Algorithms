@@ -84,3 +84,19 @@ Time Complexity - O(n)
 3. [199. Binary Tree Right Side View](https://leetcode.com/problems/binary-tree-right-side-view/)
 4. [103. Binary Tree Zigzag Level Order Traversal](https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/)
 5. [107. Binary Tree Level Order Traversal II](https://leetcode.com/problems/binary-tree-level-order-traversal-ii/)
+
+### Top Down DFS - Information is flowing from top to bottom
+1. [112. Path Sum](https://leetcode.com/problems/path-sum/)
+2. [113. Path Sum II](https://leetcode.com/problems/path-sum-ii/)
+
+## Bottom Up DFS - Information is flowing from bottom to top
+1. [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
+2. [Prem- 250. Count Unival Subtrees](https://leetcode.com/problems/count-univalue-subtrees/)
+3. [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+4. [559. Maximum Depth of N-ary Tree](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/)
+
+## Combined
+1. [Solved using In-Order Traversal - 230. Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
+
+## Tree Construction
+1. [108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)

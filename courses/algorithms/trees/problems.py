@@ -205,6 +205,7 @@ def zigzag_level_order_traversal(root):
     return result
 
 
+#---------------------------------Problem-5----------------------------------------------
 '''
 2415. Reverse Odd Levels of Binary Tree
 
@@ -255,6 +256,7 @@ def reverseOddLevels( root):
 #-------------------------Problem-5-----------------------------------------
 
 '''
+543. Diameter of Binary Tree
 Diameter of the Binary Tree
 '''
 
@@ -303,6 +305,7 @@ def binary_tree_diameter(root):
 
 #----------------------------Problem-6-------------------------------------
 '''
+113. Path Sum II
 Print all paths that sum to k 
 '''
 
@@ -322,7 +325,16 @@ def all_paths_sum_k(root, k):
     Returns:
      list_list_int32
     """
-    # Write your code here.
+    '''
+    Worst Case Scenario is when it is a balanced binary tree as in that case there \
+    could be n/2[number of leaf nodes] such paths with each of size log(n)[height]
+
+    Time Complexity - Leaf Node + Intermediate node
+                    O(nlog(n)) + Constant Work
+    Space Complexity - Input + Aux + Ouptut
+                                O(log(n)) + O(nlog(n))
+    '''
+
 
     result = []
     slate = []
@@ -359,6 +371,7 @@ def all_paths_sum_k(root, k):
 #---------------------------Problem-7-----------------------------------------
 
 '''
+112. Path Sum
 Root To Leaf Path Sum Equal To K
 '''
 
@@ -379,15 +392,20 @@ def path_sum(root, k):
     Returns:
      bool
     """
-    # Write your code here.
-    result = False
+    '''
+    Time Complexity = No of nodes * Word done per node
+                      n * O(1)  = O(n)
+    Space Complexity = Height of the binary tree = O(logn)
+    '''
+    result = [False]
     if root is None:
         return result
     def helper_path_sum(node,target):
         #base case
         if node.left is None and node.right is None:
             if target==node.value:
-                result.append(True)
+                result[0] = True
+            return 
         
         #recursive case
         if node.left is not None:
@@ -400,15 +418,45 @@ def path_sum(root, k):
     if result:
         return result[0]
         
-'''
-Worst Case Scenario is when it is a balanced binary tree as in that case there \
-could be n/2[number of leaf nodes] such paths with each of size log(n)[height]
 
-Time Complexity - Leaf Node + Intermediate node
-                  O(nlog(n)) + Constant Work
-Space Complexity - Input + Aux + Ouptut
-                            O(log(n)) + O(nlog(n))
+#----------------------------Problem-----------------------------------
+
 '''
+250 count-univalue-subtrees/
+https://leetcode.com/problems/count-univalue-subtrees/
+'''
+def count_unival(root):
+
+
+    global_cnt = [0]
+    def count_unival_helper(node):
+        if node.left is not None and node.right is not None:
+            global_cnt[0] = global_cnt[0]+1
+            return True
+
+
+        #recursive case
+        unival = True
+        left = True
+        right = True
+        if node.left:
+            left = count_unival_helper(node.left)
+            if not left and node.val != node.left.val:
+                unival = False
+            
+        if node.right:
+            right = count_unival_helper(node.right)
+            if not right and node.val!=node.right.val:
+                unival = False
+        
+        if unival:
+            global_cnt[0] = global_cnt[0] +1
+
+        return unival
+    
+    count_unival_helper(root)
+    return global_cnt
+
 
 
 #----------------------------Problem-8----------------------------------
@@ -575,7 +623,7 @@ def postorder(root):
 
 #-----------------------------Problem-11-------------------------------------
 '''
-Convert Sorted List To Binary Search Tree
+108. Convert Sorted Array to Binary Search Tree
 '''
 
 def sorted_list_to_bst(head):
@@ -813,9 +861,42 @@ class Solution:
     
         return res
 
+#----------------------------Problem--------------------------------
+'''
+104. Maximum Depth of Binary Tree
+'''
+
+def maxDepth(root):
+    
+    if root is None:
+        return 0
+    
+    def max_depth_helper(node):
+        if node.left is None and node.right is None:
+            return 1
+        
+        # recursive case
+        lh = rh = 0
+        if node.left:
+            lh = max_depth_helper(node.left)
+        
+        if node.right:
+            rh = max_depth_helper(node.right)
+        
+        #return solution
+        return max(lh,rh)+1
+    
+    res = max_depth_helper(root)
+    
+    if not res:
+        return 0
+    return res
+        
+
 #----------------------------Problem-16--------------------------------
 '''
-Kth Smallest Element Of BST
+230. Kth Smallest Element in a BST
+
 '''
 """
 For your reference:

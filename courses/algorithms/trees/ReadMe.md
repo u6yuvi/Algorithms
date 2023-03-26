@@ -36,20 +36,20 @@
 
 ## Bottom Up DFS 
 ### PostOrder Traversal
-- Diameter of the Binary Tree
-- Count Univalue Subtrees
-- Maximum Depth of N-ary Tree
+- [543. Diameter of Binary Tree](https://leetcode.com/problems/diameter-of-binary-tree/)
+- [Prem- 250. Count Unival Subtrees](https://leetcode.com/problems/count-univalue-subtrees/)
+- [104. Maximum Depth of Binary Tree](https://leetcode.com/problems/maximum-depth-of-binary-tree/)
+- [559. Maximum Depth of N-ary Tree](https://leetcode.com/problems/maximum-depth-of-n-ary-tree/)
 - Lowest Common Ancestor
 ### InOrder Traversal
-- Kth Smallest Element Of BST
+- [230. Kth Smallest Element in a BST](https://leetcode.com/problems/kth-smallest-element-in-a-bst/)
 
 ## Top Down DFS
-- Print all paths that sum to k 
-- Root To Leaf Path Sum Equal To K
+- [113. Path Sum II](https://leetcode.com/problems/path-sum-ii/)
+- [112. Path Sum](https://leetcode.com/problems/path-sum/)
 - Binary Tree Longest Consecutive Sequence[TODO]
-- Path Sum II
 - Path Sum III
 
 ## Tree Construction
-- Convert Sorted arrays to Binary Search Tree
+- [108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
 - Construct Binary Tree from Preorder Traversal
