@@ -124,4 +124,5 @@ Time Complexity - O(n)
 5. [744. Find Smallest Letter Greater Than Target](https://leetcode.com/problems/find-smallest-letter-greater-than-target/)
 6. [34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
 7. [Prem - 1150. check-if-a-number-is-majority-element-in-a-sorted-array](https://leetcode.com/problems/check-if-a-number-is-majority-element-in-a-sorted-array/)
+8. [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
 

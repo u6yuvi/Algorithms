@@ -194,4 +194,28 @@ def searchRange(nums, target: int):
     if right_index -left_index +1 > len(nums)/2:
         return True
     return False
+
+
+'''
+74. Search a 2D Matrix
+'''
+
+def searchMatrix(self, matrix, target: int) -> bool:
     
+    start = 0
+    rows = len(matrix)
+    cols = len(matrix[0])
+    
+    end = (rows*cols) -1
+    while start <=end:
+        mid = start + (end-start)//2
+        m = mid//cols
+        n = mid%cols
+        if matrix[m][n]==target:
+            return True
+        elif matrix[m][n] < target:
+            start = mid +1
+        else:
+            end = mid -1
+            
+    return False
