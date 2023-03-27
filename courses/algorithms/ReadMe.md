@@ -100,3 +100,24 @@ Time Complexity - O(n)
 
 ## Tree Construction
 1. [108. Convert Sorted Array to Binary Search Tree](https://leetcode.com/problems/convert-sorted-array-to-binary-search-tree/)
+
+
+# Strings
+
+1. [151. Reverse Words in a String](https://leetcode.com/problems/reverse-words-in-a-string/)
+2. Tries[14. Longest Common Prefix](https://leetcode.com/problems/longest-common-prefix/)
+3. [205. Isomorphic Strings](https://leetcode.com/problems/isomorphic-strings/)
+4. [Prem- 243. Shortest Word Distance]
+5. [242. Valid Anagram](https://leetcode.com/problems/valid-anagram/)
+6. [1347. Minimum Number of Steps to Make Two Strings Anagram](https://leetcode.com/problems/minimum-number-of-steps-to-make-two-strings-anagram/)
+7. [1832. Check if the Sentence Is Pangram](https://leetcode.com/problems/check-if-the-sentence-is-pangram/)
+8. [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)
+9. [125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
+
+
+# Binary Search
+
+1. [704. Binary Search](https://leetcode.com/problems/binary-search/)
+2. [374. Guess Number Higher or Lower](https://leetcode.com/problems/guess-number-higher-or-lower/)
+3. [278. First Bad Version](https://leetcode.com/problems/first-bad-version/)
+4. [35. Search Insert Position](https://leetcode.com/problems/search-insert-position/)
