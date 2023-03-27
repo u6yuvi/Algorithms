@@ -121,3 +121,7 @@ Time Complexity - O(n)
 2. [374. Guess Number Higher or Lower](https://leetcode.com/problems/guess-number-higher-or-lower/)
 3. [278. First Bad Version](https://leetcode.com/problems/first-bad-version/)
 4. [35. Search Insert Position](https://leetcode.com/problems/search-insert-position/)
+5. [744. Find Smallest Letter Greater Than Target](https://leetcode.com/problems/find-smallest-letter-greater-than-target/)
+6. [34. Find First and Last Position of Element in Sorted Array](https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/)
+7. [Prem - 1150. check-if-a-number-is-majority-element-in-a-sorted-array](https://leetcode.com/problems/check-if-a-number-is-majority-element-in-a-sorted-array/)
+

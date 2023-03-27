@@ -96,3 +96,102 @@ def searchInsert( nums, target: int) -> int:
             end = mid-1
         
     return start
+
+
+'''
+744. Find Smallest Letter Greater Than Target
+'''
+
+def nextGreatestLetter(letters, target: str) -> str:
+    
+    start = 0
+    end = len(letters)-1
+    
+    while start<=end:
+        mid = start + (end-start)//2
+        
+        if letters[mid]<=target:
+            start  = mid +1
+        elif letters[mid]>target:
+            end = mid -1
+    return letters[start%len(letters)]
+
+
+'''
+34. Find First and Last Position of Element in Sorted Array
+'''
+
+def searchRange(nums, target: int):
+    
+    # Find the leftmost pointer and then find the right most pointer
+    
+    start = 0
+    end = len(nums)-1
+    
+    while start<=end:
+        mid = start + (end-start)//2
+        
+        if nums[mid]<target:
+            start = mid +1
+        elif nums[mid]>=target:
+            end = mid-1
+        
+    if start ==len(nums) or nums[start]!=target:
+        return [-1,-1]
+    left_index = start
+    
+    #find the rightmost index
+    #use the same start index
+    end = len(nums)-1
+    
+    while start<=end:
+        mid = start + (end-start)//2
+        
+        if nums[mid]<=target:
+            start = mid +1
+        elif nums[mid]>target:
+            end = mid-1
+    right_index = end
+    
+    return [left_index,right_index]
+
+'''
+check-if-a-number-is-majority-element-in-a-sorted-array
+'''
+
+def searchRange(nums, target: int):
+    
+    # Find the leftmost pointer and then find the right most pointer
+    
+    start = 0
+    end = len(nums)-1
+    
+    while start<=end:
+        mid = start + (end-start)//2
+        
+        if nums[mid]<target:
+            start = mid +1
+        elif nums[mid]>=target:
+            end = mid-1
+        
+    if start ==len(nums) or nums[start]!=target:
+        return False
+    left_index = start
+    
+    #find the rightmost index
+    #use the same start index
+    end = len(nums)-1
+    
+    while start<=end:
+        mid = start + (end-start)//2
+        
+        if nums[mid]<=target:
+            start = mid +1
+        elif nums[mid]>target:
+            end = mid-1
+    right_index = end
+    
+    if right_index -left_index +1 > len(nums)/2:
+        return True
+    return False
+    
