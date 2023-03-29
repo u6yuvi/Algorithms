@@ -247,4 +247,17 @@ def isPalindrome(s: str) -> bool:
                 j-=1
 
     return flag
-    
+
+'''
+647. Palindromic Substrings
+
+'''
+def countSubstrings(s: str) -> int:
+    cnt =0
+    for idxi,i in enumerate(s):
+        for idxj, j in enumerate(s[idxi:],idxi):
+            #print(s[idxi:idxj+1])
+            if s[idxi] == s[idxj] and s[idxi:idxj+1] == s[idxi:idxj+1][::-1]:
+                cnt+=1
+    return cnt
+            

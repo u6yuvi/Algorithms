@@ -211,3 +211,24 @@ def maximumUniqueSubarray(nums) -> int:
     return globalsum
 
 print("maximumUniqueSubarray",maximumUniqueSubarray([5,2,1,2,5,2,1,2,5]))
+
+
+'''
+121. Best Time to Buy and Sell Stock
+
+'''
+
+def maxProfit(prices    ) -> int:
+    
+    if len(prices)==0:
+        return 0
+    min_so_far = prices[0]
+    max_profit = 0
+    for i in range(0,len(prices)):
+        if prices[i] < min_so_far:
+            min_so_far = prices[i]
+        if max_profit < prices[i] - min_so_far:
+            max_profit = prices[i] - min_so_far
+        
+    return max_profit
+        

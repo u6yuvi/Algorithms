@@ -8,6 +8,19 @@
 
 # Solved Leet Code Problems
 
+# Misc
+1. [706. Design HashMap](https://leetcode.com/problems/design-hashmap/)
+2. [1961. Check If String Is a Prefix of Array](https://leetcode.com/problems/check-if-string-is-a-prefix-of-array/)
+3. [155. Min Stack](https://leetcode.com/problems/min-stack/)
+4. [622. Design Circular Queue](https://leetcode.com/problems/design-circular-queue/)
+5. [232. Implement Queue using Stacks](https://leetcode.com/problems/implement-queue-using-stacks/)
+6. [225. Implement Stack using Queues](https://leetcode.com/problems/implement-stack-using-queues/)
+
+# Stack
+1. [20. Valid Parentheses](https://leetcode.com/problems/valid-parentheses/)
+2. [150. Evaluate Reverse Polish Notation](https://leetcode.com/problems/evaluate-reverse-polish-notation/)
+3. [71. Simplify Path](https://leetcode.com/problems/simplify-path/)
+
 ## Sorting 
 1. [912 - Sort an Array](https://leetcode.com/problems/sort-an-array/)
 2. [88. Merge Sorted Array](https://leetcode.com/problems/merge-sorted-array/)
@@ -73,6 +86,7 @@ Time Complexity - O(n)
 7. [Prem - longest-substring-with-at-most-k-distinct-characters](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
 8. [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 9. [1695. Maximum Erasure Value](https://leetcode.com/problems/maximum-erasure-value/)
+10. [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 
 ## Prefix Sum
 
@@ -113,6 +127,10 @@ Time Complexity - O(n)
 7. [1832. Check if the Sentence Is Pangram](https://leetcode.com/problems/check-if-the-sentence-is-pangram/)
 8. [49. Group Anagrams](https://leetcode.com/problems/group-anagrams/)
 9. [125. Valid Palindrome](https://leetcode.com/problems/valid-palindrome/)
+10. [647. Palindromic Substrings](https://leetcode.com/problems/palindromic-substrings/)
+
+## Substring Comparision
+1. [28. Find the Index of the First Occurrence in a String](https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/)
 
 
 # Binary Search
@@ -126,3 +144,10 @@ Time Complexity - O(n)
 7. [Prem - 1150. check-if-a-number-is-majority-element-in-a-sorted-array](https://leetcode.com/problems/check-if-a-number-is-majority-element-in-a-sorted-array/)
 8. [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
 
+
+# Dynamic Programming
+
+## solved through Brute Force
+
+1. [5. Longest Palindromic Substring](https://leetcode.com/problems/longest-palindromic-substring/)
+2. [516. Longest Palindromic Subsequence](https://leetcode.com/problems/longest-palindromic-subsequence/)
