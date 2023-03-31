@@ -88,7 +88,10 @@ Time Complexity - O(n)
 9. [1695. Maximum Erasure Value](https://leetcode.com/problems/maximum-erasure-value/)
 10. [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 
-## Prefix Sum
+## Tries
+
+1. [208. Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
+2. [Prem - 1804- Implement Tries II]()
 
 
 ## Trees
