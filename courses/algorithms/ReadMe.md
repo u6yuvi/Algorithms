@@ -90,6 +90,9 @@ Time Complexity - O(n)
 10. [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
 11. [TODO - 2488. Count Subarrays With Median K](https://leetcode.com/problems/count-subarrays-with-median-k/)
 
+# Arrays
+1. [53. Maximum Subarray](https://leetcode.com/problems/maximum-subarray/)
+
 ## Tries
 
 1. [208. Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
