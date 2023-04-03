@@ -1,3 +1,5 @@
+from typing import List
+
 '''
 208. Implement Trie (Prefix Tree)
 '''
@@ -139,3 +141,50 @@ class Trie:
 # obj.insert(word)
 # param_2 = obj.search(word)
 # param_3 = obj.startsWith(prefix)
+
+
+'''
+720. Longest Word in Dictionary
+'''
+def longestWord(self, words: List[str]) -> str:
+    
+#Implement Tries
+
+    class TrieNode():
+        def __init__(self,):
+            self.end = False
+            self.children = {}
+
+    root = TrieNode()
+    root.end = True
+
+    #Implement Tries
+    for word in words:
+        curr = root
+        for i in range(len(word)):
+            if word[i] not in curr.children:
+                curr.children[word[i]] = TrieNode()
+            curr = curr.children[word[i]] 
+
+        curr.end = True
+
+    #traversal
+    slate = []
+    self.result = [""]
+
+    def helper(curr, slate):
+        #backtrackcase
+        if curr.end is False:
+            return
+
+        #base and recursive case
+        if len(slate) > len(self.result[0]) or\
+        len(slate)== len(self.result[0]) and "".join(slate[:]) < self.result[0]:
+            self.result[0] = "".join(slate[:])
+
+        for child in curr.children:
+            slate.append(child)
+            helper(curr.children[child],slate)
+            slate.pop()
+    helper(root,slate)
+    return self.result[0]

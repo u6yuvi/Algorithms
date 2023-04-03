@@ -1,8 +1,8 @@
 
-
+import math
 #---------------------------Problem-1-------------------------------
 '''
-Count Connected Components In An Undirected Graph
+343: Count Connected Components In An Undirected Graph
 '''
 def number_of_connected_components(n, edges):
     """
@@ -12,8 +12,20 @@ def number_of_connected_components(n, edges):
     Returns:
      int32
     """
-    # Write your code here.
+    '''
+    For BFS
+    Time Complexity  -  O(n) [ No of nodes] + O(m) 
+                        Push/Pop in Queue    + neigbours of each node ~ 
+                        
+    neigbours of each node - Sum of Degree of each node ~ O(2m)[Undirected] where m is an edge
     
+    Space Complexity - Aux Space - O(n) [root node connected to all other nodes]
+                        Input Space - O(n+m) [Adj list]
+    For DFS
+    Time Complexity - O(n)[push/pop in a stack] + O(m)[Looking at adj list of each node as in BFS]
+    Sapce Complexity - Aux Space - O(n)
+
+    '''
     #build graph
     adjlist = [[] for _ in range(0,n)]
     visited = [-1]*n
@@ -851,10 +863,176 @@ data = {
 "target_word": "dog",
 "words": ["cat", "dog", "hat", "dot", "cot", "hog"]
 }
-print(get_all_shortest_transformation_sequences(data["start_word"],data["target_word"],data["words"]))
+# print(get_all_shortest_transformation_sequences(data["start_word"],data["target_word"],data["words"]))
 
 
 
-def alien_text(words):
+# def alien_text(words):
 
-    {"b":[]}
+#     {"b":[]}
+
+'''
+1129. Shortest Path with Alternating Colors
+'''
+def shortestAlternatingPaths( n: int, redEdges, blueEdges):
+        
+
+    #create adjacency list
+    adjlist = [[] for _ in range(n)]
+    for src,dst in redEdges:
+        adjlist[src].append((dst,0))
+    
+    for src, dst in blueEdges:
+        adjlist[src].append((dst,1))
+
+    visited = [()]*n
+    dist = [float("inf")]*n
+    def bfs():
+        level = 0
+        q = [(0,0),(0,1)]
+        #visited[node[0]] = 1
+        
+        while q:
+            for _ in range(len(q)):
+                node, color = q.pop(0)
+                dist[node] = min(dist[node],level)
+                for neig,neig_color in adjlist[node]:
+                    if color !=neig_color and (neig,neig_color) not in visited:
+                        q.append((neig,neig_color))
+                        visited.append((neig,neig_color))
+            level = level+1
+        
+        return dist
+
+
+
+    bfs()
+    return [i if i!=float('inf') else -1 for i in dist]
+
+red = [[0,1]]
+blue = [[2,1]]
+# print(shortestAlternatingPaths(3,red,blue))
+
+
+
+def maxDistance(grid):
+        
+    def get_neigh(i,j):
+        result = []
+        if i+1 <len(grid): 
+            if grid[i+1][j]!=1:
+                result.append((i-1,j-1))
+        if i-1 >=0:
+            if grid[i-1][j]!=1:
+                result.append((i-1,j))
+        if j-1 >=0:
+            if grid[i][j-1]!=1:
+                result.append((i,j-1))
+                
+        if j+1 < len(grid[0]):
+            if grid[i][j+1]!=1:
+                result.append((i,j+1))
+        return result
+                        
+
+    def bfs():
+        q = []
+        #get all 1's in the queue
+        for i in range(len(grid)):
+            for j in range(len(grid[0])):
+                if grid[i][j]==1:
+                    q.append((i,j))
+        #start bfs
+        dist = 0
+        while q:
+            for i in range(len(q)):
+                node = q.pop(0)
+                for x,y in get_neigh(node[0],node[1]):
+                    if grid[x][y]!=1:
+                        grid[x][y]=1
+                        q.append((x,y))
+            dist = dist +1
+        return dist
+
+    dist = bfs()
+    if dist==0 or dist==1:
+        return -1
+    return dist-1
+
+
+grid = [[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1],[1,1,1,1,1]]
+
+# print(maxDistance(grid))
+
+def minimumFuelCost( roads, seats) -> int:
+        
+    if not roads:
+        return 0 
+    adjlist = [[] for i in range(len(roads)+1)]
+    visited = [-1]*(len(roads)+1)
+    parent = [-1]*(len(roads)+1)
+    for src,dst in roads:
+        adjlist[src].append(dst)
+        adjlist[dst].append(src)
+    
+    # level = [0]
+    # fuel = [0]
+    # def bfs():
+    #     # for i in adjlist:
+    #     #     if 
+    #     q = adjlist[0]
+    #     for idx,i in enumerate(adjlist):
+    #         if 0 in i:
+    #             q.append(adjlist[idx])
+    #     while q:
+    #         cnt = len(q)
+    #         node = q.pop(0)
+    #         for _ in range(cnt):
+    #             node = q.pop(0)
+    #             for neigh in adjlist[node]:
+    #                 if visited[neigh]==-1:
+    #                     visited[neigh] ==1
+    #                     q.append(neigh)
+            
+    #         seat = seats-1
+    #         level[0] = level[0]+1
+    #         if seat>=0:
+    #             fuel[0] = fuel[0]+ len(q)
+            
+    #         if seat<0:
+    #             seat=seats
+    #             fuel[0] = fuel[0] + level[0]*len(q)
+                
+    #     return fuel
+    
+    fuel = [0]
+    def dfs(node):
+        repr1 = 1
+        result = []
+        visited[node]=1   
+
+        for neigh in adjlist[node]:
+            if visited[neigh]==-1:
+                visited[neigh]==1
+                #parent[neigh] = node
+                res = dfs
+                res%2
+                result.append(dfs(neigh))
+        #if node!=0:
+            #repr = repr +1
+            #fuel[0] = fuel[0] + math.ceil((repr1)/seats)
+        if node!=0:
+            repr1 = sum(result)+1
+            fuel[0] = fuel[0] + math.ceil((repr1)/seats)
+        return repr1
+
+
+    
+    res = dfs(0)
+    return fuel[0]
+
+
+
+roads = [[3,1],[3,2],[1,0],[0,4],[0,5],[4,6]]
+seats = 2
+print(minimumFuelCost(roads,seats))

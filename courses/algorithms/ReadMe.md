@@ -61,6 +61,7 @@ Time Complexity - O(n)
 7. [39. Combination Sum](https://leetcode.com/problems/combination-sum/)
 8. [40. Combination Sum II](https://leetcode.com/problems/combination-sum-ii/)
 9. [131. Palindrome Partitioning](https://leetcode.com/problems/palindrome-partitioning/)???
+10. [22. Generate Parentheses](https://leetcode.com/problems/generate-parentheses/)
 
 
 ## Fixed - Sliding Window
@@ -87,11 +88,13 @@ Time Complexity - O(n)
 8. [3. Longest Substring Without Repeating Characters](https://leetcode.com/problems/longest-substring-without-repeating-characters/)
 9. [1695. Maximum Erasure Value](https://leetcode.com/problems/maximum-erasure-value/)
 10. [121. Best Time to Buy and Sell Stock](https://leetcode.com/problems/best-time-to-buy-and-sell-stock/)
+11. [TODO - 2488. Count Subarrays With Median K](https://leetcode.com/problems/count-subarrays-with-median-k/)
 
 ## Tries
 
 1. [208. Implement Trie (Prefix Tree)](https://leetcode.com/problems/implement-trie-prefix-tree/)
 2. [Prem - 1804- Implement Tries II]()
+3. [720. Longest Word in Dictionary](https://leetcode.com/problems/longest-word-in-dictionary/)
 
 
 ## Trees
@@ -147,6 +150,10 @@ Time Complexity - O(n)
 7. [Prem - 1150. check-if-a-number-is-majority-element-in-a-sorted-array](https://leetcode.com/problems/check-if-a-number-is-majority-element-in-a-sorted-array/)
 8. [74. Search a 2D Matrix](https://leetcode.com/problems/search-a-2d-matrix/)
 
+
+# Graphs
+1. [Prem-343: Count Connected Components In An Undirected Graph](https://leetcode.com/problems/number-of-connected-components-in-an-undirected-graph/)
+2. [261- Graph Valid Tree](https://leetcode.com/problems/graph-valid-tree/)
 
 # Dynamic Programming
 
